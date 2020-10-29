@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <meta charset = utf-8/> 
+        <link rel="stylesheet" href="sign-in.component.css">
+    </head>
+    <body>  
+        <div class="one">
+            <h3>Regístrate</h3>
+        </div>  
+        <form (submit)="data(ID, Names, LastNames, Password, Email)">
+            <div class="two" >
+                <h5>Ingrese su registro académico</h5><input type="text" class="NoID" #ID ><br>
+                <h5>Ingrese sus nombres</h5><input type="text" class="name" #Names><br>
+                <h5>Ingrese sus apellidos</h5><input type="text" class="lastname" #LastNames><br>
+                <h5>Ingrese su contraseña</h5><input type="text" class="NewPassword" #Password><br>
+                <h5>Ingrese su correo electronico</h5><input type="text" class="NewEmailAddress" #Email><br>
+            </div>
+            <br>
+            <div class="three" align="center">
+                <a href="" >
+                    <button class="BNewSingIn">Registrarse</button>
+                </a>
+            </div>
+        </form>
+        <br>
+        <div class="four" align="center">
+            <a href="" >
+                <button class="BReturn" #btn>Regresar a página de inicio</button>
+            </a>
+        </div>
+    </body>
+</html>

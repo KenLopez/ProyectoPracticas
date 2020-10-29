@@ -1,0 +1,43 @@
+body{
+    background-color: darkgrey;
+}
+img {
+    width: 400px;
+    margin: auto;
+    display: block;
+    font-size: medium;
+}
+div.cero {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+}
+textarea.user{
+    width: 350px;
+    height: 20px;
+    background-color: white;
+    resize: none;
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: auto;
+}
+textarea.password{
+    width: 350px;
+    height: 20px;
+    background-color: white;
+    resize: none;
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: auto;
+}
+button.BLogIn {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    width: 180px;
+    height: 20px;
+}
+button.BSignIn {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    width: 180px;
+    height: 20px;
+}

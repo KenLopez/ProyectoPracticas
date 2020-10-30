@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EMPTY } from 'rxjs';
+import { Usuario } from '../nodes/usuario';
+import { UsuariosService } from '../services/usuarios.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -68,9 +70,27 @@ export class SignInComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  user: Usuario={
+    carnet:0,
+    nombres:'',
+    apellidos:'',
+    contrasena:'',
+    correo:''
+  }
+
+  constructor(private usuario:UsuariosService) { }
 
   ngOnInit(): void {
+  }
+
+  crearUsuario(){
+    this.usuario.añadirUsuario(this.user).subscribe(
+      res=>{
+        console.log(res);
+      },err=>{
+        console.log(err);
+      }
+    );
   }
 
 }

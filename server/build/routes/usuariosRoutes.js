@@ -60,6 +60,90 @@ class UsuariosRoutes {
                 }
             });
         });
+        //*********************************************************get carnet************************************************************ */
+        this.router.get('/carnet', function (req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    var cadena = "select carnet from Usuario";
+                    var con = new mssql.ConnectionPool(config);
+                    con.connect(function (err) {
+                        var req = new mssql.Request(con);
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        req.query(cadena, function (err, recordset) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                res.send(JSON.stringify(recordset.recordsets[0]));
+                            }
+                            con.close();
+                        });
+                    });
+                }
+                catch (Exception) {
+                    console.log(Exception);
+                }
+            });
+        });
+        //*********************************************************get correo************************************************************ */
+        this.router.get('/mail', function (req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    var cadena = "select correo from Usuario";
+                    var con = new mssql.ConnectionPool(config);
+                    con.connect(function (err) {
+                        var req = new mssql.Request(con);
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        req.query(cadena, function (err, recordset) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                res.send(JSON.stringify(recordset.recordsets[0]));
+                            }
+                            con.close();
+                        });
+                    });
+                }
+                catch (Exception) {
+                    console.log(Exception);
+                }
+            });
+        });
+        //*********************************************************get contrasena************************************************************ */
+        this.router.get('/password', function (req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    var cadena = "select contrasena from Usuario";
+                    var con = new mssql.ConnectionPool(config);
+                    con.connect(function (err) {
+                        var req = new mssql.Request(con);
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        req.query(cadena, function (err, recordset) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                res.send(JSON.stringify(recordset.recordsets[0]));
+                            }
+                            con.close();
+                        });
+                    });
+                }
+                catch (Exception) {
+                    console.log(Exception);
+                }
+            });
+        });
     }
 }
 const usuariosRoutes = new UsuariosRoutes();

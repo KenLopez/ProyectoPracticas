@@ -53,6 +53,87 @@ class UsuariosRoutes{
                 console.log(Exception);
             }
         });
+
+//*********************************************************get carnet************************************************************ */
+        this.router.get('/carnet', async function (req, res) {
+            try{
+                var cadena = "select carnet from Usuario";
+                var con = new mssql.ConnectionPool(config);
+
+                con.connect(function(err:any){
+                var req = new mssql.Request(con);
+                if(err){
+                    console.log(err);
+                    return;
+                }
+            req.query(cadena,function(err:any, recordset:any){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.send(JSON.stringify(recordset.recordsets[0]));
+                    }
+                    con.close();
+                });
+            });                
+            }catch(Exception){
+                console.log(Exception);
+            }
+        });
+
+//*********************************************************get correo************************************************************ */
+        this.router.get('/mail', async function (req, res) {
+            try{
+                var cadena = "select correo from Usuario";
+                var con = new mssql.ConnectionPool(config);
+
+                con.connect(function(err:any){
+                var req = new mssql.Request(con);
+                if(err){
+                    console.log(err);
+                    return;
+                }
+            req.query(cadena,function(err:any, recordset:any){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.send(JSON.stringify(recordset.recordsets[0]));
+                    }
+                    con.close();
+                });
+            });                
+            }catch(Exception){
+                console.log(Exception);
+            }
+        });
+
+//*********************************************************get contrasena************************************************************ */
+        this.router.get('/password', async function (req, res) {
+            try{
+                var cadena = "select contrasena from Usuario";
+                var con = new mssql.ConnectionPool(config);
+
+                con.connect(function(err:any){
+                var req = new mssql.Request(con);
+                if(err){
+                    console.log(err);
+                    return;
+                }
+            req.query(cadena,function(err:any, recordset:any){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.send(JSON.stringify(recordset.recordsets[0]));
+                    }
+                    con.close();
+                });
+            });                
+            }catch(Exception){
+                console.log(Exception);
+            }
+        });
     }
 }
 

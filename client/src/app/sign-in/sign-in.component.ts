@@ -71,7 +71,7 @@ export class SignInComponent implements OnInit {
   }
 
   user: Usuario={
-    carnet:0,
+    carnet:null,
     nombres:'',
     apellidos:'',
     contrasena:'',

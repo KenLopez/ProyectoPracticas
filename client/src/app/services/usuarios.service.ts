@@ -13,4 +13,16 @@ export class UsuariosService {
   añadirUsuario(data:any){
     return this.httpClient.post('http://localhost:3000/usuario/nuevo', data);
   }
+
+  obtenerCarnets(){
+    return this.httpClient.get('http://localhost:3000/usuario/carnet');
+  }
+
+  obtenerCorreos(){
+    return this.httpClient.get('http://localhost:3000/usuario/mail');
+  }
+
+  obtenerContrasena(){
+    return this.httpClient.get('http://localhost:3000/usuario/password');
+  }
 }

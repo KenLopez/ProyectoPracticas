@@ -1,0 +1,35 @@
+.buscador{
+    width: 700px;
+    padding-left: 50px;
+}
+
+select{
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+button{
+    border-width: 4px;
+    border-color: black;
+    border-style: solid;
+    background-color: #2b3e50;
+    font-size: 16px;
+    width: 100px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: none;
+    color: #ebebeb;
+    border-radius: 10px;
+    margin-left: 70px;
+}
+
+button:hover{
+    background-color: #8ba7c1;    ;
+    color: #ebebeb;
+    border-color: #2b3e50;
+    border-style: solid;
+}
+
+.principal{
+    margin-bottom: 40px;
+}

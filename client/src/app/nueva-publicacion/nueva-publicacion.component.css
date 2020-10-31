@@ -1,0 +1,110 @@
+.publicacion{
+    border:#2b3e50;
+    border-radius: 10px;
+    border-style: solid;
+    font-family: Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+h1{
+    font-size: 20px;
+    background-color: #5981a6;
+    padding-left: 40px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    margin: 0px;
+    border-bottom: #2b3e50;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+    border-bottom-style: solid;
+    color: #ebebeb;
+    cursor: default;
+}
+
+.tipos label, p{
+    font-size: 16px;
+    line-height: 24px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.tipos p{
+    padding-right: 20px;
+    cursor: default;
+}
+
+label{
+    cursor: pointer;
+}
+
+.tipos input{
+    cursor: pointer;
+    padding-top: -5px;
+}
+
+.tipos{
+    margin-right: 40px;
+    margin-left: 40px;
+}
+
+select{
+    cursor: pointer;
+}
+
+.selector{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.texto{
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+textarea{
+    position: relative;
+    font-size: 16px;
+    resize: none;
+    margin-top: 10px;
+    outline: none;
+    height: 150px;
+    padding: 10px;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+.botones{
+    border-top:#2b3e50;
+    border-top-style: solid;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    border-bottom-right-radius: 9px;
+    border-bottom-left-radius: 9px;
+}
+
+button{
+    border-width: 4px;
+    border-color: black;
+    border-style: solid;
+    background-color: #2b3e50;
+    font-size: 16px;
+    line-height: 35px;
+    width: 100px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: none;
+    color: #ebebeb;
+    border-radius: 10px;
+}
+
+button:hover{
+    background-color: #8ba7c1;    ;
+    color: #ebebeb;
+    border-color: #2b3e50;
+    border-style: solid;
+}
+
+

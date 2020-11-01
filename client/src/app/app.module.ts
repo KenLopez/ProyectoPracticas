@@ -7,6 +7,10 @@ import { AppComponent } from './app.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 
+//Mario, agregue los modulos HttpClientModule y FormsModule
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
+
 const routes: Route[] = [
   {path: '', component: LogInComponent},
   {path:'SignIn', component: SignInComponent}
@@ -21,6 +25,8 @@ const routes: Route[] = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

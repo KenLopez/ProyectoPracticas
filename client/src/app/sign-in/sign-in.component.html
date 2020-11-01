@@ -9,16 +9,16 @@
         </div>  
         <form (submit)="data(ID, Names, LastNames, Password, Email)">
             <div class="two" >
-                <h5>Ingrese su registro académico</h5><input type="text" class="NoID" #ID ><br>
-                <h5>Ingrese sus nombres</h5><input type="text" class="name" #Names><br>
-                <h5>Ingrese sus apellidos</h5><input type="text" class="lastname" #LastNames><br>
-                <h5>Ingrese su contraseña</h5><input type="text" class="NewPassword" #Password><br>
-                <h5>Ingrese su correo electronico</h5><input type="text" class="NewEmailAddress" #Email><br>
+                <h5>Ingrese su registro académico</h5><input name="carnet" type="text" [(ngModel)]="user.carnet" class="NoID" #ID ><br>
+                <h5>Ingrese sus nombres</h5><input name="nombres" type="text"  [(ngModel)]="user.nombres" class="name" #Names><br>
+                <h5>Ingrese sus apellidos</h5><input name="apellidos" type="text"  [(ngModel)]="user.apellidos" class="lastname" #LastNames><br>
+                <h5>Ingrese su contraseña</h5><input name="contrasena" type="password"  [(ngModel)]="user.contrasena" class="NewPassword" #Password><br>
+                <h5>Ingrese su correo electronico</h5><input name="correo" type="email" [(ngModel)]="user.correo" class="NewEmailAddress" #Email><br>
             </div>
             <br>
             <div class="three" align="center">
-                <a href="" >
-                    <button class="BNewSingIn">Registrarse</button>
+                <a href="">
+                    <button class="BNewSingIn" (click)="crearUsuario()">Registrarse</button>
                 </a>
             </div>
         </form>

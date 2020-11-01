@@ -15,8 +15,8 @@ var config = {
     server: 'localhost',
     database: 'proyecto_practicas',
     host: 'localhost',
-    user: 'ProyectoPracticas',
-    password: '1234',
+    user: 'mario',
+    password: 'MarioSolis',
     port: 1433,
     "options": {
         "encrypt": true,

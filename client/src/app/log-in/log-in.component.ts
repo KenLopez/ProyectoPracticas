@@ -15,35 +15,7 @@ export class LogInComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  llamarCarnets(){
-    this.usuario.obtenerCarnets().subscribe(
-      res=>{
-        console.log(res);
-      },err=>{
-        console.log(err);
-      }
-    );
-  }
 
-  llamarCorreos(){
-    this.usuario.obtenerCorreos().subscribe(
-      res=>{
-        console.log(res);
-      },err=>{
-        console.log(err);
-      }
-    );
-  }
-
-  llamarContrasenas(){
-    this.usuario.obtenerContrasena().subscribe(
-      res=>{
-        console.log(res);
-      },err=>{
-        console.log(err);
-      }
-    );
-  }
 
   compare(NoCarnet, Password){
 

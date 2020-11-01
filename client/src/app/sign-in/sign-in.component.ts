@@ -66,7 +66,6 @@ export class SignInComponent implements OnInit {
       Email.value = "";
 
       alert('Usted se ha registrado exitosamente');
-      return false;
     }
   }
 

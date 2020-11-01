@@ -11,7 +11,7 @@ div.cero {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
 }
-textarea.user{
+input.user{
     width: 350px;
     height: 20px;
     background-color: white;
@@ -20,7 +20,7 @@ textarea.user{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     margin: auto;
 }
-textarea.password{
+input.password{
     width: 350px;
     height: 20px;
     background-color: white;

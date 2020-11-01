@@ -7,7 +7,7 @@
         <div class="one">
             <h3>Regístrate</h3>
         </div>  
-        <form (submit)="data(ID, Names, LastNames, Password, Email)" action="/">
+        <form (submit)="data(ID, Names, LastNames, Password, Email)">
             <div class="two" >
                 <h5>Ingrese su registro académico</h5><input name="carnet" type="text" [(ngModel)]="user.carnet" class="NoID" #ID ><br>
                 <h5>Ingrese sus nombres</h5><input name="nombres" type="text"  [(ngModel)]="user.nombres" class="name" #Names><br>

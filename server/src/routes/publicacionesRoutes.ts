@@ -4,8 +4,8 @@ var mssql = require('mssql');
 var config = {
     server: 'localhost',
     host: 'localhost',
-    user: 'mario',
-    password: 'MarioSolis',
+    user: 'ProyectoPracticas',
+    password: '1234',
     port: 1433,
     "options": {
         "encrypt": true,

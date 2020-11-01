@@ -11,7 +11,7 @@ var config = {
     "options": {
         "encrypt": true,
         "enableArithAbort": true
-        },
+    },
 }
 
 class UsuariosRoutes{

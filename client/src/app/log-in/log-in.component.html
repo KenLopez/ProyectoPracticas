@@ -10,18 +10,13 @@
         <div class="one" align="center">
             <img src="https://proxy.ingenieria.usac.edu.gt/autenticacion/XUI/images/login-logo.png?v=13.0.0">
         </div>    
-        <form  action="/Home" >
-            <div class="two" align="center">
-                <p>CORREO ESTUDIANTIL/NO. CARNET</p><input type="text" class="user" #NoCarnet><br>
-                <p>INGRESE CONTRASEÑA</p><input type="password" class="password" #Password>
-            </div>
-            <div align="center">
-                <a><button class="BLogIn" (click)="compare(NoCarnet, Password)">Ingresar</button></a>
-            </div>
-        </form>
+        <div class="two" align="center">
+            <p>CORREO ESTUDIANTIL/NO. CARNET</p><textarea class="user" name="user" id="" cols="30" rows="1"></textarea><br>
+            <p>INGRESE CONTRASEÑA</p><textarea class="password" name="password" id="" cols="30" rows="1"></textarea>
+        </div>
         <br>
         <div class="three" align="center">
-            <a href="/SignIn" ><button class="BSignIn">Registrarse</button></a>
+            <a><button class="BLogIn">Ingresar</button></a> <a href="/SignIn" ><button class="BSignIn">Registrarse</button></a>
         </div>
     </body>
 </html>

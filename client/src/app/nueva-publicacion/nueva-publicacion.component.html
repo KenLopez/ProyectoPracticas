@@ -1,39 +1,47 @@
 <div class="publicacion">
 
     <h1><img src="https://www.flaticon.com/svg/static/icons/svg/684/684831.svg" width="50" height="50" alt="" loading="lazy"> ESCRIBE UNA PUBLICACIÓN</h1>
-    <form>
+    <form (ngSubmit)="publicar()">
         <div class="tipos form-row">
             <p>Categoría:</p>
             <div class="custom-control custom-radio">
-                <input class="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                <label class="custom-control-label" for="inlineRadio1">Cursos</label>
+                <input class="custom-control-input" type="radio" name="tipoPublicacion" id="Tipo1" value="1" checked (change)="changeDisplay($event.target.value)">
+                <label class="custom-control-label" for="Tipo1">Cursos</label>
             </div>
             <div class="custom-control custom-radio">
-                <input class="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                <label class="custom-control-label" for="inlineRadio2">Catedrático</label>
+                <input class="custom-control-input" type="radio" name="tipoPublicacion" id="Tipo2" value="2" (change)="changeDisplay($event.target.value)">
+                <label class="custom-control-label" for="Tipo2">Catedrático</label>
             </div>
             <div class="custom-control custom-radio">
-                <input class="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                <label class="custom-control-label" for="inlineRadio3">Curso-Catedrático</label>
+                <input class="custom-control-input" type="radio" name="tipoPublicacion" id="Tipo3" value="3" (change)="changeDisplay($event.target.value)">
+                <label class="custom-control-label" for="Tipo3">Curso-Catedrático</label>
             </div>
         </div>
         <div class="selector">
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+            <select class="form-control" id="exampleFormControlSelect1" *ngIf='display=="1"' name = "tema" (change)="changeIndex($event.target.value)">
+                <option *ngFor='let curso of cursos; let i = index' [value]="i">
+                    {{curso.toString()}}
+                </option>
+            </select>
+            <select class="form-control" id="exampleFormControlSelect1" *ngIf='display=="2"' name = "tema" (change)="changeIndex($event.target.value)">
+                <option *ngFor='let catedratico of catedraticos; let i = index' [value]="i">
+                    {{catedratico.toString()}}
+                </option>
+            </select>
+            <select class="form-control" id="exampleFormControlSelect1" *ngIf='display=="3"' name = "tema" (change)="changeIndex($event.target.value)">
+                <option *ngFor='let elemento of cursoCatedraticos; let i = index' [value]="i">
+                    {{elemento.toString()}}
+                </option>
             </select>
         </div>
         <div class="texto">
-            <textarea class="form-control" name="contenido-publicacion" placeholder="Escribe tu publicación..."></textarea>
+            <textarea class="form-control" name="mensaje" placeholder="Escribe tu publicación..." [(ngModel)]="mensaje" (ngModelChange)="quitarError()"></textarea>
+            <p class="text-danger">{{errorMensaje}}</p>
         </div>
-    <div class="botones">
-        <div class="container">
-            <button>Publicar</button>
+        <div class="botones">
+            <div class="container">
+                <button type="submit">Publicar</button>
+            </div>
         </div>
-        
-    </div>
     </form>
 </div>

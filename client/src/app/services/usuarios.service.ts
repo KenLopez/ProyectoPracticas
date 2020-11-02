@@ -25,4 +25,7 @@ export class UsuariosService {
   obtenerContrasena(){
     return this.httpClient.get('http://localhost:3000/usuario/password');
   }
+  cambiarContrasena(data:any){
+    return this.httpClient.post('http://localhost:3000/usuario/contrasenaNueva', data);
+  }
 }

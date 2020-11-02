@@ -14,24 +14,29 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="two col-lg-6" align="center">
-                    <div class="row justify-content-center">
-                        <label class="indicar" for="user">CORREO ESTUDIANTIL/NO. CARNET</label>
+                <form action="">
+                    <div class="two col-lg-6" align="center">
+                        <div class="row justify-content-center">
+                            <label class="indicar" for="user">CORREO ESTUDIANTIL/NO. CARNET</label>
+                        </div>
+                        <div class="row justify-content-center">
+                            <input id="user" type="text" class="textbox" name="user" #NoCarnet>
+                        </div>
+                        <div class="row justify-content-center">
+                            <label class="indicar" for="password">INGRESE CONTRASEÑA</label>
+                        </div>
+                        <div class="row justify-content-center">
+                            <input id="password" class="textbox" type="password" name="password" #Password>
+                        </div>
+                        <div class="row justify-content-center">
+                            <a><button class="BLogIn" (click)="compare(NoCarnet, Password)" >Ingresar</button></a>
+                        </div>
                     </div>
-                    <div class="row justify-content-center">
-                        <input id="user" type="text" class="textbox" name="user">
-                    </div>
-                    <div class="row justify-content-center">
-                        <label class="indicar" for="password">INGRESE CONTRASEÑA</label>
-                    </div>
-                    <div class="row justify-content-center">
-                        <input id="password" class="textbox" type="password" name="password">
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="row justify-content-center">
                 <div class="three" align="center">
-                    <a><button class="BLogIn">Ingresar</button></a> <a href="/SignIn" ><button class="BSignIn">Registrarse</button></a>
+                     <a href="/SignIn" ><button class="BSignIn">Registrarse</button></a>
                 </div>
             </div>
             <div class="row justify-content-center">

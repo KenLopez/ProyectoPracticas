@@ -3,30 +3,45 @@
         <meta charset = utf-8/> 
         <link rel="stylesheet" href="sign-in.component.css">
     </head>
-    <body>  
-        <div class="one">
-            <h3>Regístrate</h3>
-        </div>  
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Usac_logo.png/250px-Usac_logo.png" width="70" height="70" class="d-inline-block align-top" alt="" loading="lazy">
+            <label id="titulo">USAC TOPCHART</label>
+        </nav>
+
+
+        <div class="row justify-content-lg-center">
+            <div class="one col-lg-6">
+                <label id="registro">Regístrate</label>
+            </div>  
+        </div>
+        
         <form (submit)="data(ID, Names, LastNames, Password, Email)">
-            <div class="two" >
-                <h5>Ingrese su registro académico</h5><input name="carnet" type="text" [(ngModel)]="user.carnet" class="NoID" #ID ><br>
-                <h5>Ingrese sus nombres</h5><input name="nombres" type="text"  [(ngModel)]="user.nombres" class="name" #Names><br>
-                <h5>Ingrese sus apellidos</h5><input name="apellidos" type="text"  [(ngModel)]="user.apellidos" class="lastname" #LastNames><br>
-                <h5>Ingrese su contraseña</h5><input name="contrasena" type="password"  [(ngModel)]="user.contrasena" class="NewPassword" #Password><br>
-                <h5>Ingrese su correo electronico</h5><input name="correo" type="email" [(ngModel)]="user.correo" class="NewEmailAddress" #Email><br>
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="two col-lg-6" >
+                        <h5>Ingrese su registro académico</h5><input name="carnet" type="text" [(ngModel)]="user.carnet" class="NoID textbox" #ID ><br>
+                        <h5>Ingrese sus nombres</h5><input name="nombres" type="text"  [(ngModel)]="user.nombres" class="name textbox" #Names><br>
+                        <h5>Ingrese sus apellidos</h5><input name="apellidos" type="text"  [(ngModel)]="user.apellidos" class="lastname textbox" #LastNames><br>
+                        <h5>Ingrese su contraseña</h5><input name="contrasena" type="password"  [(ngModel)]="user.contrasena" class="NewPassword textbox" #Password><br>
+                        <h5>Ingrese su correo electronico</h5><input name="correo" type="email" [(ngModel)]="user.correo" class="NewEmailAddress textbox" #Email><br>
+                    </div>
+                </div>
             </div>
-            <br>
-            <div class="three" align="center">
-                <a href="">
-                    <button class="BNewSingIn" (click)="crearUsuario()">Registrarse</button>
-                </a>
+            <div class="row justify-content-md-center" align="center">
+                <div class="three col-lg-6" align="center">
+                    <a href="">
+                        <button class="BNewSingIn" (click)="crearUsuario()">Registrarse</button>
+                    </a>
+                </div>
             </div>
         </form>
-        <br>
-        <div class="four" align="center">
-            <a href="" >
-                <button class="BReturn" #btn>Regresar a página de inicio</button>
-            </a>
+        <div class="row justify-content-md-center">
+            <div class="four col-lg-6" align="center">
+                <a href="" >
+                    <button class="BReturn" #btn>Regresar</button>
+                </a>
+            </div>
         </div>
     </body>
 </html>

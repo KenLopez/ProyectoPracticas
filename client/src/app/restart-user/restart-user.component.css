@@ -1,16 +1,17 @@
 body{
-    background: darkgrey;
+    
 }
 
-img {
-    width: 400px;
-    margin: auto;
-    display: block;
-    font-size: medium;
-}
-div.cero {
+#titulo {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    text-align: center;
+    font-size: 35px;
+    margin: 20px;
+}
+
+.indicar {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 10px;
+    font-size: 20px;
 }
 
 .textbox {
@@ -23,30 +24,18 @@ div.cero {
     margin: auto;
 }
 
-
 button{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
     width: 132px;
     height: 35px;
     border-radius: 6px;
-    margin: 10px;
-    margin-top: 20px;
-}
-
-.indicar {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin: 10px;
-    font-size: 15px;
-}
-
-#titulo {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 20px;
     margin: 20px;
+    margin-top: 30px;
+    margin-left: 10px;
 }
 
-#forgot{
-    margin-left: 205px;
-    font-size: 15px;
+.contenedor{
+    margin: 100px;
+    margin-left: 35%;
 }

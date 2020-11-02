@@ -5,23 +5,40 @@
     </head>
     <body>
         <div class="cero">
-            <h3>Bienvenido</h3>
+            <label id="titulo">Bienvenido</label>
         </div>
-        <div class="one" align="center">
-            <img src="https://proxy.ingenieria.usac.edu.gt/autenticacion/XUI/images/login-logo.png?v=13.0.0">
-        </div>    
-        <form  action="/Home" >
-            <div class="two" align="center">
-                <p>CORREO ESTUDIANTIL/NO. CARNET</p><input type="text" class="user" #NoCarnet><br>
-                <p>INGRESE CONTRASEÑA</p><input type="password" class="password" #Password>
+        <div class="container ">
+            <div class="row justify-content-center">
+                <div class="one" align="center">
+                    <img src="https://proxy.ingenieria.usac.edu.gt/autenticacion/XUI/images/login-logo.png?v=13.0.0">
+                </div>
             </div>
-            <div align="center">
-                <a><button class="BLogIn" (click)="compare(NoCarnet, Password)">Ingresar</button></a>
+            <div class="row justify-content-center">
+                <div class="two col-lg-6" align="center">
+                    <div class="row justify-content-center">
+                        <label class="indicar" for="user">CORREO ESTUDIANTIL/NO. CARNET</label>
+                    </div>
+                    <div class="row justify-content-center">
+                        <input id="user" type="text" class="textbox" name="user">
+                    </div>
+                    <div class="row justify-content-center">
+                        <label class="indicar" for="password">INGRESE CONTRASEÑA</label>
+                    </div>
+                    <div class="row justify-content-center">
+                        <input id="password" class="textbox" type="password" name="password">
+                    </div>
+                </div>
             </div>
-        </form>
-        <br>
-        <div class="three" align="center">
-            <a href="/SignIn" ><button class="BSignIn">Registrarse</button></a>
+            <div class="row justify-content-center">
+                <div class="three" align="center">
+                    <a><button class="BLogIn">Ingresar</button></a> <a href="/SignIn" ><button class="BSignIn">Registrarse</button></a>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <a href="/ForgotPw"><label id="forgot">¿Olvido contraseña?</label></a>
+                </div>
+            </div>
         </div>
     </body>
 </html>

@@ -48,7 +48,7 @@ create table CursosAprobados(
 );
 
 create table Publicacion(
-	idPublicacion int PRIMARY KEY,
+	idPublicacion int identity(1,1) PRIMARY KEY,
 	mensaje varchar(100),
 	usuario_carnet int FOREIGN KEY REFERENCES Usuario(carnet),
 	fecha date,
@@ -68,7 +68,7 @@ create table Comentario(
 
 
 
-select carnet from Usuario
+
 INSERT INTO Curso(codigoCurso,nombre) VALUES (283 ,'Analisis y Diseño de Sistemas 1');
 INSERT INTO Curso(codigoCurso,nombre) VALUES (785 ,'Analisis y Diseño de Sistemas 2');
 INSERT INTO Curso(codigoCurso,nombre) VALUES (778 ,'Arquitectura de Computadoras y Ensambladores 1');
@@ -106,10 +106,7 @@ INSERT INTO Curso(codigoCurso,nombre) VALUES (722 ,'Teoria de Sistemas 1');
 INSERT INTO Curso(codigoCurso,nombre) VALUES (724 ,'Teoria de Sistemas 2');
 
 
-delete from Curso
-delete from Curso_Catedratico
-delete from Catedratico
-delete from Auxiliar
+
 
 INSERT INTO Catedratico(noCatedratico,nombres,apellidos) VALUES (1 ,'Jose Ricardo', 'Morales Prado');
 INSERT INTO Catedratico(noCatedratico,nombres,apellidos) VALUES (2 ,'William Samuel', 'Guevara Orellana');
@@ -322,6 +319,7 @@ FROM (((Curso_Catedratico
  JOIN Catedratico ON Curso_Catedratico.catedratico_NoCatedratico=Catedratico.noCatedratico)
  JOIN Auxiliar ON Curso_Catedratico.auxiliar_NoAuxiliar=Auxiliar.noAuxiliar);
 
-select * from Auxiliar
-select * from Curso
-select * from PensumSistemas
+
+
+
+

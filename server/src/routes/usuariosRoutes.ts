@@ -134,6 +134,37 @@ class UsuariosRoutes{
                 console.log(Exception);
             }
         });
+
+
+        //****************************************cambiar contrasena************************************************************ */
+        this.router.post('/contrasenaNueva', async function (req, res) {
+            try{
+                let resp = req.body;
+                console.log(resp.carnet);
+                var cadena = "UPDATE Usuario set contrasena = '"+resp.nuevaContrasena+"' WHERE carnet = '"+resp.carnet+"' ";
+                var con = new mssql.ConnectionPool(config);
+
+                con.connect(function(err:any){
+                var req = new mssql.Request(con);
+                if(err){
+                    console.log(err);
+                    return;
+                }
+            req.query(cadena,function(err:any, recordset:any){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.send(JSON.stringify(recordset));
+                    }
+                    con.close();
+                });
+            });                
+            }catch(Exception){
+                console.log(Exception);
+            }
+        });
+
     }
 }
 

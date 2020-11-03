@@ -2,6 +2,8 @@ import express, { Application } from 'express';
 import indexRoutes from './routes/indexRoutes';
 import publicacionesRoutes from './routes/publicacionesRoutes';
 import usuariosRoutes from './routes/usuariosRoutes';
+import comentariosRoutes from './routes/comentariosRoutes';
+import cursosAprobadosRoutes from './routes/cursosAprobadosRoutes';
 
 import morgan from 'morgan';
 import cors from 'cors';
@@ -28,6 +30,8 @@ class Server{
         this.app.use('/', indexRoutes);
         this.app.use('/publicacion', publicacionesRoutes);
         this.app.use('/usuario', usuariosRoutes)
+        this.app.use('/comentario', comentariosRoutes)
+        this.app.use('/cursoAprobado', cursosAprobadosRoutes)
     }
 
     start(): void{

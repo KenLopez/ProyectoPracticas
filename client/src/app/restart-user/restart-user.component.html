@@ -8,41 +8,48 @@
             <div class="row">
                 <label id="titulo">Restaurar contraseña</label>
             </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <label class="indicar">Confirmar carne:</label>
+            <form action="/" href="/">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label class="indicar">Confirmar carne:</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <input type="text" class="textbox">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <input type="text" class="textbox" name="carnet" [(ngModel)]="contrasenaNueva.carnet" #Carnet>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <label class="indicar">Confirmar correo:</label>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label class="indicar">Confirmar correo:</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <input type="mail" class="textbox">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <input type="mail" class="textbox" #Correo>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <label class="indicar">Cambiar contraseña:</label>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label class="indicar">Cambiar contraseña:</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <input type="password" class="textbox">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <input type="password" class="textbox" name="nuevaContrasena" [(ngModel)]="contrasenaNueva.nuevaContrasena" #Contrasena>
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <a href="/">
+                        <button (click)="resetPassword(Carnet, Correo)" >Continuar</button>
+                        </a>
+                </div>
+            </form>
             <div class="row">
                 <a href="/">
-                    <button>Continuar</button>
+                    <button>Iniciar Sesión</button>
                     </a>
             </div>
         </div>
-    </body>
+    </body> 
 </html>

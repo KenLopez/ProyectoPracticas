@@ -22,20 +22,20 @@ var config = {
         "enableArithAbort": true
     },
 };
-class PublicacionesRoutes {
+class CursosAprobadosRoutes {
     constructor() {
         this.router = express_1.Router();
         this.config();
     }
     config() {
-        this.router.get('/', (req, res) => { res.send('esta es una publicacion'); });
-        //      **************** Anadir publicacion ******************
-        this.router.post('/nueva', function (req, res) {
+        this.router.get('/', (req, res) => { res.send('esto es un curso aprobado'); });
+        //      **************** Anadir comentario ******************
+        this.router.post('/nuevo', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
                     let resp = req.body;
                     console.log(resp.carnet);
-                    var cadena = "insert into Publicacion values('" + resp.mensaje + "','" + resp.usuario_carnet + "','" + resp.fecha + "','" + resp.curso_catedratico + "','" + resp.codigo_curso + "','" + resp.no_catedratico + "','" + resp.tipo + "');";
+                    var cadena = "insert into CursosAprobados values('" + resp.carnet + "','" + resp.curso + "','" + resp.notaAprobada + "');";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);
@@ -59,11 +59,11 @@ class PublicacionesRoutes {
                 }
             });
         });
-        //******************************************get publicacion************************************************************ */
-        this.router.get('/getPublicacion', function (req, res) {
+        //******************************************get cursos aprobados************************************************************ */
+        this.router.get('/getCursoAprobado', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    var cadena = "select * from Publicacion";
+                    var cadena = "select * from CursosAprobados";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);
@@ -89,5 +89,5 @@ class PublicacionesRoutes {
         });
     }
 }
-const publicacionesRoutes = new PublicacionesRoutes();
-exports.default = publicacionesRoutes.router;
+const cursosAprobadosRoutes = new CursosAprobadosRoutes();
+exports.default = cursosAprobadosRoutes.router;

@@ -15,34 +15,55 @@ export class LogInComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  llamarCarnets(){
+  compare(NoCarnet, Password){
+
     this.usuario.obtenerCarnets().subscribe(
-      res=>{
-        console.log(res);
-      },err=>{
-        console.log(err);
-      }
-    );
-  }
+      res1=>{
+        console.log(res1);
 
-  llamarCorreos(){
-    this.usuario.obtenerCorreos().subscribe(
-      res=>{
-        console.log(res);
-      },err=>{
-        console.log(err);
-      }
-    );
-  }
+        this.usuario.obtenerCorreos().subscribe(
+          res2=>{
+            console.log(res2);
 
-  llamarContrasenas(){
-    this.usuario.obtenerContrasena().subscribe(
-      res=>{
-        console.log(res);
+            this.usuario.obtenerContrasena().subscribe(
+              res=>{
+                console.log(res);
+                let contrasenas = JSON.parse(JSON.stringify(res));
+                let usuarios = JSON.parse(JSON.stringify(res1));
+                let correos = JSON.parse(JSON.stringify(res2));
+
+                console.log(contrasenas.length);
+
+                //if ( || correos.includes(NoCarnet)) {
+                  for (let i=0 ; i < usuarios.length ; i++) {
+                    console.log(res1[i].carnet)
+                    console.log(NoCarnet.value);
+                    if (res1[i].carnet == NoCarnet.value || res2[i].correo == NoCarnet.value){
+                      alert('El usuario es el correcto');
+                      if (res[i].contrasena == Password.value){
+                        alert('usted ha ingresado exitosamente');
+                      } else {
+                        alert('La contraseña es incorrecta');
+                        break;
+                      }
+                    } else {
+                      console.log('Este usuario es incorrecto');
+                    }
+                  }
+                //}
+              },err=>{
+                console.log(err);
+              }
+            );
+          },err=>{
+            console.log(err);
+          }
+          );
       },err=>{
         console.log(err);
       }
     );
+    
   }
 
 }

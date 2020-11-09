@@ -13,6 +13,7 @@ const express_1 = require("express");
 var mssql = require('mssql');
 var config = {
     server: 'localhost',
+    database: 'proyecto_practicas',
     host: 'localhost',
     user: 'ProyectoPracticas',
     password: '1234',
@@ -22,20 +23,20 @@ var config = {
         "enableArithAbort": true
     },
 };
-class PublicacionesRoutes {
+class ComentariosRoutes {
     constructor() {
         this.router = express_1.Router();
         this.config();
     }
     config() {
-        this.router.get('/', (req, res) => { res.send('esta es una publicacion'); });
-        //      **************** Anadir publicacion ******************
-        this.router.post('/nueva', function (req, res) {
+        this.router.get('/', (req, res) => { res.send('esto es un comentario'); });
+        //      **************** Anadir curso aprobado ******************
+        this.router.post('/nuevo', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
                     let resp = req.body;
                     console.log(resp.carnet);
-                    var cadena = "insert into Publicacion values('" + resp.mensaje + "','" + resp.usuario_carnet + "','" + resp.fecha + "','" + resp.curso_catedratico + "','" + resp.codigo_curso + "','" + resp.no_catedratico + "','" + resp.tipo + "');";
+                    var cadena = "insert into Comentario values('" + resp.mensaje + "','" + resp.idPublicacion + "','" + resp.carnet + "');";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);
@@ -59,11 +60,11 @@ class PublicacionesRoutes {
                 }
             });
         });
-        //******************************************get publicacion************************************************************ */
-        this.router.get('/getPublicacion', function (req, res) {
+        //******************************************get comentario************************************************************ */
+        this.router.get('/getComentario', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    var cadena = "select * from Publicacion";
+                    var cadena = "select * from Comentario";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);
@@ -89,5 +90,5 @@ class PublicacionesRoutes {
         });
     }
 }
-const publicacionesRoutes = new PublicacionesRoutes();
-exports.default = publicacionesRoutes.router;
+const comentariosRoutes = new ComentariosRoutes();
+exports.default = comentariosRoutes.router;

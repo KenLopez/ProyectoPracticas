@@ -144,6 +144,36 @@ class UsuariosRoutes {
                 }
             });
         });
+        //**cambiar contrasena** */
+        this.router.post('/contrasenaNueva', function (req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    let resp = req.body;
+                    console.log(resp.carnet);
+                    var cadena = "UPDATE Usuario set contrasena = '" + resp.nuevaContrasena + "' WHERE carnet = '" + resp.carnet + "';";
+                    var con = new mssql.ConnectionPool(config);
+                    con.connect(function (err) {
+                        var req = new mssql.Request(con);
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        req.query(cadena, function (err, recordset) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                res.send(JSON.stringify(recordset));
+                            }
+                            con.close();
+                        });
+                    });
+                }
+                catch (Exception) {
+                    console.log(Exception);
+                }
+            });
+        });
     }
 }
 const usuariosRoutes = new UsuariosRoutes();

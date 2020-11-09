@@ -20,9 +20,6 @@ export class RestartUserComponent implements OnInit {
   }
 
   resetPassword(Carnet, Correo){
-
-    
-
         this.usuario.obtenerCorreos().subscribe(
           res2=>{
             console.log(res2);
@@ -38,10 +35,10 @@ export class RestartUserComponent implements OnInit {
                 //if ( || correos.includes(NoCarnet)) {
                   for (let i=0 ; i < correos.length ; i++) {
                     console.log(Carnet.value);
+
                     if (res[i].carnet == Carnet.value){
+
                       if (res2[i].correo == Correo.value){
-
-
 
                         this.usuario.cambiarContrasena(this.contrasenaNueva).subscribe(
                           res=>{
@@ -51,19 +48,16 @@ export class RestartUserComponent implements OnInit {
                             console.log(err);
                           }
                         );
-                        
-
-
-          
+                                  
                       } else {
                         console.log('El correo no coinside con el carnet');
                       }
+
                     } else {
                       console.log('El carnet ingresado no existe en la base de datos');
                     }
                   }
                 //}
-
               },err=>{
                 console.log(err);
               }
@@ -71,7 +65,7 @@ export class RestartUserComponent implements OnInit {
           },err=>{
             console.log(err);
           }
-          );
+        );
       
     
   }

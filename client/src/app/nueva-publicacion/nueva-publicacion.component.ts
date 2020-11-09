@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Curso } from '../../Classes/Curso';
-import { Catedratico } from '../../Classes/Catedratico';
-import { CursoCatedratico } from '../../Classes/CursoCatedratico';
+import { Curso } from '../Classes/Curso';
+import { Catedratico } from '../Classes/Catedratico';
+import { CursoCatedratico } from '../Classes/CursoCatedratico';
 import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 
 @Component({

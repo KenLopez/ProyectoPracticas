@@ -1,0 +1,77 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">
+    Cursos Aprobados
+  </a>
+</nav>
+
+<div class="container bg-white" >
+  <div class="row">
+    <div class="col-md-8 mt-4">
+
+    <div class="card mb-4 bg-dark">
+      <div class="card-body">
+        <div class="card-title text-white-50">
+          Cursos Area de Sistemas
+        </div>
+      </div>
+    </div>
+
+      <ul class="list-group">
+        
+        <li 
+        *ngFor="let curso of cursosArray"
+        class="list-group-item list-group-item-action"
+        (click)="openForEdit(curso)"
+        [class.active]="curso == selectedCurso"
+        >
+        <span class="badge badge-primary">{{curso.id}}</span> {{ curso.nombre }} - {{ curso.creditos }} creditos
+        </li>
+      </ul>
+      <div class="card mt-4">
+        <div class="card-body">
+          <div class="card-title">
+            Inserta Un Nuevo Curso Aprobado
+          </div>
+          <div class="form-group">
+            <input type="text" [(ngModel)]="selectedCurso.nombre"  placeholder="Nombre del curso" class="form-control" disabled="disabled">
+          </div>
+          <div class="form-group">
+            <input type="number" [(ngModel)]="selectedCurso.creditos" placeholder="Creditos del curso" class="form-control" disabled="disabled">
+          </div>
+          <button (click)="add()" class="btn btn-primary">
+            Cargar
+          </button>
+          <button
+            *ngIf="selectedCurso.id != 0"
+            class="btn btn-danger"
+            (click)="delete()"
+            >
+            Eliminar
+          </button>
+          
+        </div>
+      </div>
+      <div class="card mt-4 bg-dark mb-4">
+        <div class="card-body">
+          <div class="card-title text-white-50" >
+            Sus Cursos Aprobados
+          </div>
+        </div>
+      </div>
+
+      <ul class="list-group">
+        <li 
+        *ngFor="let curs of cursosArray2"
+        class="list-group-item list-group-item-action mt-4 mb-4"
+        >
+        <span class="badge badge-primary">{{curs.id}}</span> {{ curs.nombre }} - {{ curs.creditos }} creditos
+        </li>
+      </ul>
+
+    </div>
+    <div class="col-md-4 mt-4 ">
+      <img width="300" alt="Facultad de Ingenieria" src="http://ingenieria.cunoc.usac.edu.gt/portal/images/logo-usac%20(copia).png">
+    </div>
+  </div>
+</div>
+

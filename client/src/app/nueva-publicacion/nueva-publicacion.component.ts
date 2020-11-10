@@ -3,6 +3,7 @@ import { Curso } from '../Classes/Curso';
 import { Catedratico } from '../Classes/Catedratico';
 import { CursoCatedratico } from '../Classes/CursoCatedratico';
 import { isGeneratedFile } from '@angular/compiler/src/aot/util';
+import { PublicacionService } from '../services/publicacion.service';
 
 @Component({
   selector: 'nueva-publicacion',
@@ -20,7 +21,7 @@ export class NuevaPublicacionComponent implements OnInit {
   index: string;
   errorMensaje: string;
 
-  constructor() { 
+  constructor(private publicacion:PublicacionService) { 
     this.mensaje = "";
     this.errorMensaje = "";
     //this.usuario = new Usuario();
@@ -35,7 +36,7 @@ export class NuevaPublicacionComponent implements OnInit {
   changeDisplay(numero: string){
     this.display = numero;
     if(this.display == "1"){
-      //getCursos()
+      this.cursos = this.getCursos()
     }else if(this.display == "2"){
       //getCatedraticos()
     }else if(this.display == "3"){
@@ -48,14 +49,25 @@ export class NuevaPublicacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cursos.push(new Curso(1, "Prácticas Iniciales"));
+    /*this.cursos.push(new Curso(1, "Prácticas Iniciales"));
     this.cursos.push(new Curso(2, "Prácticas Iniciales"));
     this.catedraticos.push(new Catedratico(1, "Sergio", "Gómez Bravo"));
-    this.cursoCatedraticos.push(new CursoCatedratico(1, new Curso(1, "Prácticas Iniciales"), new Catedratico(1, "Sergio", "Gómez Bravo")))
-    //getCursos()
+    this.cursoCatedraticos.push(new CursoCatedratico(1, new Curso(1, "Prácticas Iniciales"), new Catedratico(1, "Sergio", "Gómez Bravo")))*/
+    this.getCursos()
   }
 
-  getCursos(){} //Obtener de BD, guardar cada registro como objeto de la clase Curso 
+  getCursos(): Curso[]{
+    var arreglo: Curso[];
+    this.publicacion.getCursos().subscribe(
+      res=>{
+        arreglo = <Curso[]>res;
+      },err=>{
+        console.log(err);
+      }
+    )
+    console.log(arreglo);
+    return arreglo;
+  } //Obtener de BD, guardar cada registro como objeto de la clase Curso 
   
 
   getCatedraticos(){} //Obtener de BD, guardar cada registro como objeto de la clase Catedratico

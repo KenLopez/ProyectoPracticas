@@ -13,6 +13,7 @@ const express_1 = require("express");
 var mssql = require('mssql');
 var config = {
     server: 'localhost',
+    database: 'proyecto_practicas',
     host: 'localhost',
     user: 'ProyectoPracticas',
     password: '1234',
@@ -22,48 +23,18 @@ var config = {
         "enableArithAbort": true
     },
 };
-class PublicacionesRoutes {
+class CursosRoutes {
     constructor() {
         this.router = express_1.Router();
         this.config();
     }
     config() {
         this.router.get('/', (req, res) => { res.send('esta es una publicacion'); });
-        //      **************** Anadir publicacion ******************
-        this.router.post('/nueva', function (req, res) {
+        //*********************************************************get carnet************************************************************ */
+        this.router.get('/getCurso', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    let resp = req.body;
-                    console.log(resp.carnet);
-                    var cadena = "insert into Publicacion values('" + resp.mensaje + "','" + resp.usuario_carnet + "','" + resp.fecha + "','" + resp.curso_catedratico + "','" + resp.codigo_curso + "','" + resp.no_catedratico + "','" + resp.tipo + "');";
-                    var con = new mssql.ConnectionPool(config);
-                    con.connect(function (err) {
-                        var req = new mssql.Request(con);
-                        if (err) {
-                            console.log(err);
-                            return;
-                        }
-                        req.query(cadena, function (err, recordset) {
-                            if (err) {
-                                console.log(err);
-                            }
-                            else {
-                                res.send(JSON.stringify(recordset));
-                            }
-                            con.close();
-                        });
-                    });
-                }
-                catch (Exception) {
-                    console.log(Exception);
-                }
-            });
-        });
-        //******************************************get publicacion************************************************************ */
-        this.router.get('/getPublicacion', function (req, res) {
-            return __awaiter(this, void 0, void 0, function* () {
-                try {
-                    var cadena = "select * from Publicacion";
+                    var cadena = "select * from Curso";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);
@@ -87,11 +58,39 @@ class PublicacionesRoutes {
                 }
             });
         });
-        //******************************************get publicacion************************************************************ */
-        this.router.get('/getPublicacion', function (req, res) {
+        //*********************************************************get contrasena************************************************************ */
+        this.router.get('/catedratico', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    var cadena = "select * from Publicacion";
+                    var cadena = "Select * from Catedratico";
+                    var con = new mssql.ConnectionPool(config);
+                    con.connect(function (err) {
+                        var req = new mssql.Request(con);
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        req.query(cadena, function (err, recordset) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                res.send(JSON.stringify(recordset.recordsets[0]));
+                            }
+                            con.close();
+                        });
+                    });
+                }
+                catch (Exception) {
+                    console.log(Exception);
+                }
+            });
+        });
+        //*********************************************************get contrasena************************************************************ */
+        this.router.get('/curso-catedratico', function (req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    var cadena = "select Curso_Catedratico.idCatedraticoCurso, Curso.codigoCurso,Curso.nombre,Catedratico.nombres,Catedratico.apellidos FROM ((Curso_Catedratico JOIN Curso ON Curso_Catedratico.curso_CodigoCurso=Curso.codigoCurso) JOIN Catedratico ON Curso_Catedratico.catedratico_NoCatedratico=Catedratico.noCatedratico);";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);
@@ -117,5 +116,5 @@ class PublicacionesRoutes {
         });
     }
 }
-const publicacionesRoutes = new PublicacionesRoutes();
-exports.default = publicacionesRoutes.router;
+const cursosRoutes = new CursosRoutes();
+exports.default = cursosRoutes.router;

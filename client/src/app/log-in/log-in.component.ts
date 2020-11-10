@@ -51,7 +51,6 @@ export class LogInComponent implements OnInit {
                     }
                   }
                 //}
-
               },err=>{
                 console.log(err);
               }

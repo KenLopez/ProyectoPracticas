@@ -6,6 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { HomeComponent } from './home/home.component';
+import { SearchComponent } from './search/search.component';
+import { NuevaPublicacionComponent } from './nueva-publicacion/nueva-publicacion.component';
+import { NavegacionComponent } from './navegacion/navegacion.component';
+
 
 //Mario, agregue los modulos HttpClientModule y FormsModule
 import {HttpClientModule} from '@angular/common/http';
@@ -23,7 +28,11 @@ const routes: Route[] = [
     AppComponent,
     LogInComponent,
     SignInComponent,
-    RestartUserComponent
+    RestartUserComponent,
+    HomeComponent,
+    NuevaPublicacionComponent,
+    SearchComponent,
+    NavegacionComponent
   ],
   imports: [
     BrowserModule,

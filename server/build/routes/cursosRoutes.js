@@ -90,7 +90,7 @@ class CursosRoutes {
         this.router.get('/curso-catedratico', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    var cadena = "select Curso.nombre,Catedratico.nombres,Catedratico.apellidos FROM ((Curso_Catedratico JOIN Curso ON Curso_Catedratico.curso_CodigoCurso=Curso.codigoCurso) JOIN Catedratico ON Curso_Catedratico.catedratico_NoCatedratico=Catedratico.noCatedratico);";
+                    var cadena = "select Curso_Catedratico.idCatedraticoCurso, Curso.codigoCurso,Curso.nombre,Catedratico.nombres,Catedratico.apellidos FROM ((Curso_Catedratico JOIN Curso ON Curso_Catedratico.curso_CodigoCurso=Curso.codigoCurso) JOIN Catedratico ON Curso_Catedratico.catedratico_NoCatedratico=Catedratico.noCatedratico);";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);

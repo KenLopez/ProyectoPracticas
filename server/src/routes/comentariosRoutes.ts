@@ -3,6 +3,7 @@ var mssql = require('mssql');
 
 var config = {
     server: 'localhost',
+    database: 'proyecto_practicas',
     host: 'localhost',
     user: 'ProyectoPracticas',
     password: '1234',
@@ -13,7 +14,7 @@ var config = {
         },
 }
 
-class PublicacionesRoutes{
+class ComentariosRoutes{
 
     public router: Router = Router();
 
@@ -22,14 +23,14 @@ class PublicacionesRoutes{
     }
 
     config(): void{
-        this.router.get('/', (req, res)=>{res.send('esta es una publicacion');});
+        this.router.get('/', (req, res)=>{res.send('esto es un comentario');});
 
-        //      **************** Anadir publicacion ******************
-        this.router.post('/nueva', async function (req, res) {
+        //      **************** Anadir curso aprobado ******************
+        this.router.post('/nuevo', async function (req, res) {
             try{
                 let resp = req.body;
                 console.log(resp.carnet);
-                var cadena = "insert into Publicacion values('"+resp.mensaje+"','"+resp.usuario_carnet+"','"+resp.fecha+"','"+resp.curso_catedratico+"','"+resp.codigo_curso+"','"+resp.no_catedratico+"','"+resp.tipo+"');";
+                var cadena = "insert into Comentario values('"+resp.mensaje+"','"+resp.idPublicacion+"','"+resp.carnet+"');";
                 var con = new mssql.ConnectionPool(config);
 
                 con.connect(function(err:any){
@@ -52,10 +53,11 @@ class PublicacionesRoutes{
                 console.log(Exception);
             }
         });
-        //******************************************get publicacion************************************************************ */
-        this.router.get('/getPublicacion', async function (req, res) {
+
+        //******************************************get comentario************************************************************ */
+        this.router.get('/getComentario', async function (req, res) {
             try{
-                var cadena = "select * from Publicacion";
+                var cadena = "select * from Comentario";
                 var con = new mssql.ConnectionPool(config);
 
                 con.connect(function(err:any){
@@ -79,36 +81,10 @@ class PublicacionesRoutes{
             }
         });
 
-//******************************************get publicacion************************************************************ */
-this.router.get('/getPublicacion', async function (req, res) {
-    try{
-        var cadena = "select * from Publicacion";
-        var con = new mssql.ConnectionPool(config);
-
-        con.connect(function(err:any){
-        var req = new mssql.Request(con);
-        if(err){
-            console.log(err);
-            return;
-        }
-    req.query(cadena,function(err:any, recordset:any){
-            if(err){
-                console.log(err);
-            }
-            else{
-                res.send(JSON.stringify(recordset.recordsets[0]));
-            }
-            con.close();
-        });
-    });                
-    }catch(Exception){
-        console.log(Exception);
-    }
-});
 
     }
+    
 }
 
-const publicacionesRoutes = new PublicacionesRoutes();
-export default publicacionesRoutes.router;
-
+const comentariosRoutes = new ComentariosRoutes();
+export default comentariosRoutes.router;

@@ -23,76 +23,18 @@ var config = {
         "enableArithAbort": true
     },
 };
-class UsuariosRoutes {
+class CursosRoutes {
     constructor() {
         this.router = express_1.Router();
         this.config();
     }
     config() {
         this.router.get('/', (req, res) => { res.send('esta es una publicacion'); });
-        //*********************************************************añadir usuario************************************************************ */
-        this.router.post('/nuevo', function (req, res) {
-            return __awaiter(this, void 0, void 0, function* () {
-                try {
-                    let resp = req.body;
-                    console.log(resp.carnet);
-                    var cadena = "insert into usuario values('" + resp.carnet + "','" + resp.nombres + "','" + resp.apellidos + "','" + resp.contrasena + "','" + resp.correo + "');";
-                    var con = new mssql.ConnectionPool(config);
-                    con.connect(function (err) {
-                        var req = new mssql.Request(con);
-                        if (err) {
-                            console.log(err);
-                            return;
-                        }
-                        req.query(cadena, function (err, recordset) {
-                            if (err) {
-                                console.log(err);
-                            }
-                            else {
-                                res.send(JSON.stringify(recordset));
-                            }
-                            con.close();
-                        });
-                    });
-                }
-                catch (Exception) {
-                    console.log(Exception);
-                }
-            });
-        });
         //*********************************************************get carnet************************************************************ */
-        this.router.get('/carnet', function (req, res) {
+        this.router.get('/getCurso', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    var cadena = "select carnet from Usuario";
-                    var con = new mssql.ConnectionPool(config);
-                    con.connect(function (err) {
-                        var req = new mssql.Request(con);
-                        if (err) {
-                            console.log(err);
-                            return;
-                        }
-                        req.query(cadena, function (err, recordset) {
-                            if (err) {
-                                console.log(err);
-                            }
-                            else {
-                                res.send(JSON.stringify(recordset.recordsets[0]));
-                            }
-                            con.close();
-                        });
-                    });
-                }
-                catch (Exception) {
-                    console.log(Exception);
-                }
-            });
-        });
-        //*********************************************************get correo************************************************************ */
-        this.router.get('/mail', function (req, res) {
-            return __awaiter(this, void 0, void 0, function* () {
-                try {
-                    var cadena = "select correo from Usuario";
+                    var cadena = "select * from Curso";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);
@@ -117,10 +59,10 @@ class UsuariosRoutes {
             });
         });
         //*********************************************************get contrasena************************************************************ */
-        this.router.get('/password', function (req, res) {
+        this.router.get('/catedratico', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    var cadena = "select contrasena from Usuario";
+                    var cadena = "Select * from Catedratico";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);
@@ -144,13 +86,11 @@ class UsuariosRoutes {
                 }
             });
         });
-        //**cambiar contrasena** */
-        this.router.post('/contrasenaNueva', function (req, res) {
+        //*********************************************************get contrasena************************************************************ */
+        this.router.get('/curso-catedratico', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    let resp = req.body;
-                    console.log(resp.carnet);
-                    var cadena = "UPDATE Usuario set contrasena = '" + resp.nuevaContrasena + "' WHERE carnet = '" + resp.carnet + "';";
+                    var cadena = "select Curso_Catedratico.idCatedraticoCurso, Curso.codigoCurso,Curso.nombre,Catedratico.nombres,Catedratico.apellidos FROM ((Curso_Catedratico JOIN Curso ON Curso_Catedratico.curso_CodigoCurso=Curso.codigoCurso) JOIN Catedratico ON Curso_Catedratico.catedratico_NoCatedratico=Catedratico.noCatedratico);";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);
@@ -163,7 +103,7 @@ class UsuariosRoutes {
                                 console.log(err);
                             }
                             else {
-                                res.send(JSON.stringify(recordset));
+                                res.send(JSON.stringify(recordset.recordsets[0]));
                             }
                             con.close();
                         });
@@ -176,5 +116,5 @@ class UsuariosRoutes {
         });
     }
 }
-const usuariosRoutes = new UsuariosRoutes();
-exports.default = usuariosRoutes.router;
+const cursosRoutes = new CursosRoutes();
+exports.default = cursosRoutes.router;

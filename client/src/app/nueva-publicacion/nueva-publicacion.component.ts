@@ -36,7 +36,7 @@ export class NuevaPublicacionComponent implements OnInit {
   changeDisplay(numero: string){
     this.display = numero;
     if(this.display == "1"){
-      this.cursos = this.getCursos()
+      this.getCursos()
     }else if(this.display == "2"){
       //getCatedraticos()
     }else if(this.display == "3"){
@@ -56,17 +56,21 @@ export class NuevaPublicacionComponent implements OnInit {
     this.getCursos()
   }
 
-  getCursos(): Curso[]{
-    var arreglo: Curso[];
+  getCursos(): void{
+    var arreglo: Curso[] = [];
     this.publicacion.getCursos().subscribe(
       res=>{
-        arreglo = <Curso[]>res;
+        console.log(res);
       },err=>{
         console.log(err);
       }
     )
-    console.log(arreglo);
-    return arreglo;
+    /*let x = [{codigoCurso: 771, nombre: "IPC2"}, {codigoCurso: 770, nombre: "IPC1"} ]
+    for (let y of x){
+      arreglo.push(new Curso(y.codigoCurso, y.nombre))
+    };
+    this.cursos = arreglo;
+    console.log(this.cursos);*/
   } //Obtener de BD, guardar cada registro como objeto de la clase Curso 
   
 

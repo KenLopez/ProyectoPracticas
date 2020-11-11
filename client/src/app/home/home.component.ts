@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Publicacion } from '../../Classes/Publicacion';
 
 @Component({
   selector: 'home',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  publicaciones: Publicacion[] = []
+
   constructor() { }
 
   ngOnInit(): void {
+    //getPublicaciones();
   }
+
+  
 
 }

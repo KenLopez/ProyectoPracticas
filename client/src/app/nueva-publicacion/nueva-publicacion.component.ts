@@ -13,7 +13,7 @@ import { PublicacionService } from '../services/publicacion.service';
 
 export class NuevaPublicacionComponent implements OnInit {
   mensaje: string;
-  //usuario: Usuario;
+  usuario: number;
   cursos: Curso[];
   catedraticos: Catedratico[];
   cursoCatedraticos: CursoCatedratico[];
@@ -89,6 +89,7 @@ export class NuevaPublicacionComponent implements OnInit {
         console.log(err);
       }
     )
+    nuevoArray.push(new Catedratico(0, 'Segio Leonel', 'Gómez Bravo'));
     console.log(nuevoArray);
     this.catedraticos = nuevoArray;
   } //Obtener de BD, guardar cada registro como objeto de la clase Catedratico
@@ -109,7 +110,7 @@ export class NuevaPublicacionComponent implements OnInit {
     )
     console.log(nuevoArray);
     this.cursoCatedraticos = nuevoArray;
-  } //Obtener de la BD, guardar cada registro como objeto de la clase CursoCatedrático
+  } 
 
   publicar(){
     if(this.mensajeValido()){

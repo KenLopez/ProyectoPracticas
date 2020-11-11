@@ -3,6 +3,7 @@ var mssql = require('mssql');
 
 var config = {
     server: 'localhost',
+    database: 'proyecto_practicas',
     host: 'localhost',
     user: 'ProyectoPracticas',
     password: '1234',

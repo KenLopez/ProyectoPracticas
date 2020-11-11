@@ -13,6 +13,7 @@ const express_1 = require("express");
 var mssql = require('mssql');
 var config = {
     server: 'localhost',
+    database: 'proyecto_practicas',
     host: 'localhost',
     user: 'ProyectoPracticas',
     password: '1234',

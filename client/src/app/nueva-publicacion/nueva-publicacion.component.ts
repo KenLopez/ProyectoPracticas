@@ -195,6 +195,28 @@ export class NuevaPublicacionComponent implements OnInit {
     console.log(publicacion)
   }
 
+  addPublicacionAuxiliar(publicacion: Publicacion){
+    this.publicacion.addPublicacionAuxiliar(publicacion).subscribe(
+      res=>{
+        console.log(res);
+      },err=>{
+        console.log(err);
+      }
+    );
+    console.log(publicacion)
+  }
+
+  addPublicacioncursoAuxiliar(publicacion: Publicacion){
+    this.publicacion.addPublicacionAuxiliarCurso(publicacion).subscribe(
+      res=>{
+        console.log(res);
+      },err=>{
+        console.log(err);
+      }
+    );
+    console.log(publicacion)
+  }
+
   publicar(){
     if(this.mensajeValido()){
       this.errorMensaje = "";
@@ -212,9 +234,7 @@ export class NuevaPublicacionComponent implements OnInit {
           mensaje: this.mensaje,
           usuario_carnet: 201900629,//this.usuario,
           fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
-          curso_Catedratico_idCatedraticoCurso: null,
           curso_CodigoCurso: this.cursos[this.index].codigoCurso,
-          catedratico_NoCatedratico: null,
           tipo: 1
         }
 
@@ -230,8 +250,6 @@ export class NuevaPublicacionComponent implements OnInit {
           mensaje: this.mensaje,
           usuario_carnet: 201900629,//this.usuario,
           fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
-          curso_Catedratico_idCatedraticoCurso: null,
-          curso_CodigoCurso: null,
           catedratico_NoCatedratico: this.catedraticos[this.index].noCatedratico,
           tipo: 2
         }
@@ -249,14 +267,44 @@ export class NuevaPublicacionComponent implements OnInit {
           usuario_carnet: 201900629,//this.usuario,
           fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
           curso_Catedratico_idCatedraticoCurso: this.cursoCatedraticos[this.index].id,
-          curso_CodigoCurso: null,
-          catedratico_NoCatedratico: null,
           tipo: 3
         }
 
         console.log(publicacion);
 
         this.addPublicacionCursoCatedratico(publicacion);
+
+      }else if(this.display == "4"){
+        console.log(this.mensaje);
+        console.log(this.auxiliares[this.index].toString());
+
+        let publicacion: Publicacion={
+          mensaje: this.mensaje,
+          usuario_carnet: 201900629,//this.usuario,
+          fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
+          auxiliar_idAuxiliar: this.auxiliares[this.index].noAuxiliar,
+          tipo: 4
+        }
+
+        console.log(publicacion);
+
+        this.addPublicacionAuxiliar(publicacion);
+
+      }else if(this.display == "5"){
+        console.log(this.mensaje);
+        console.log(this.cursosAuxiliar[this.index].toString());
+
+        let publicacion: Publicacion={
+          mensaje: this.mensaje,
+          usuario_carnet: 201900629,//this.usuario,
+          fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
+          auxiliar_Curso: this.cursosAuxiliar[this.index].id,
+          tipo: 5
+        }
+
+        console.log(publicacion);
+
+        this.addPublicacioncursoAuxiliar(publicacion);
 
       }
       //Guardar en BD

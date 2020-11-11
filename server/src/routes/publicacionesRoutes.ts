@@ -28,8 +28,8 @@ class PublicacionesRoutes{
         this.router.post('/nueva', async function (req, res) {
             try{
                 let resp = req.body;
-                console.log(resp.carnet);
-                var cadena = "insert into Publicacion values('"+resp.mensaje+"',"+resp.usuario_carnet+",'"+resp.fecha+"',"+resp.curso_catedratico+","+resp.codigo_curso+","+resp.no_catedratico+","+resp.tipo+");";
+                console.log(resp.mensaje);
+                var cadena = "INSERT INTO Publicacion (mensaje,usuario_carnet,fecha,curso_Catedratico_idCatedraticoCurso,curso_CodigoCurso,catedratico_NoCatedratico,tipo) VALUES('Mario de mierda',201903895,'2020-11-11 00:43:09',null,283,null,1);";                
                 var con = new mssql.ConnectionPool(config);
 
                 con.connect(function(err:any){

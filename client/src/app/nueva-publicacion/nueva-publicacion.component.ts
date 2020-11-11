@@ -124,6 +124,7 @@ export class NuevaPublicacionComponent implements OnInit {
         console.log(err);
       }
     );
+    console.log(publicacion)
   }
 
   publicar(){

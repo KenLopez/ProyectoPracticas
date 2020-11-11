@@ -21,6 +21,6 @@ export class PublicacionService {
   }
 
   addPublicacion(data:any){
-    return this.httpClient.post('http://localhost:3000/publicacion/nueva', data);
+    return this.httpClient.post('http://localhost:3000/publicacion/nueva',data);
   }
 }

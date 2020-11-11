@@ -15,4 +15,8 @@ export class PublicacionService {
   getCatedraticos(){
     return this.httpClient.get('http://localhost:3000/cursos/catedratico');
   }
+
+  getCursoCatedratico(){
+    return this.httpClient.get('http://localhost:3000/cursos/curso-catedratico');
+  }
 }

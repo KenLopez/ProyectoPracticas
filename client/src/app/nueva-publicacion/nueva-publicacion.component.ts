@@ -38,9 +38,9 @@ export class NuevaPublicacionComponent implements OnInit {
     if(this.display == "1"){
       this.getCursos()
     }else if(this.display == "2"){
-      //getCatedraticos()
+      this.getCatedraticos()
     }else if(this.display == "3"){
-      //getCursoCatedraticos()
+      this.getCursoCatedraticos()
     }
   }
 
@@ -57,26 +57,75 @@ export class NuevaPublicacionComponent implements OnInit {
   }
 
   getCursos(): void{
+<<<<<<< HEAD
     var arreglo: Curso[] = [];
     this.publicacion.getCursos().subscribe(
       res=>{
         console.log(res);
+=======
+    let nuevoArray: Curso[]=[]
+    this.publicacion.getCursos().subscribe(
+      res=>{//console.log(res);
+        let cursos = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < cursos.length ; i++) {
+          nuevoArray.push(new Curso(res[i].codigoCurso, res[i].nombre));
+        }
+
+>>>>>>> cf69197e018cea088a0649c151fef4e168f6784b
       },err=>{
         console.log(err);
       }
     )
+<<<<<<< HEAD
     /*let x = [{codigoCurso: 771, nombre: "IPC2"}, {codigoCurso: 770, nombre: "IPC1"} ]
     for (let y of x){
       arreglo.push(new Curso(y.codigoCurso, y.nombre))
     };
     this.cursos = arreglo;
     console.log(this.cursos);*/
+=======
+    console.log(nuevoArray);
+    this.cursos = nuevoArray;
+>>>>>>> cf69197e018cea088a0649c151fef4e168f6784b
   } //Obtener de BD, guardar cada registro como objeto de la clase Curso 
   
 
-  getCatedraticos(){} //Obtener de BD, guardar cada registro como objeto de la clase Catedratico
+  getCatedraticos(): void{
+    let nuevoArray: Catedratico[]=[]
+    this.publicacion.getCatedraticos().subscribe(
+      res=>{
+        let catedraticos = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < catedraticos.length ; i++) {
+          nuevoArray.push(new Catedratico(res[i].noCatedratico, res[i].nombres, res[i].apellidos));
+        }
+
+      },err=>{
+        console.log(err);
+      }
+    )
+    console.log(nuevoArray);
+    this.catedraticos = nuevoArray;
+  } //Obtener de BD, guardar cada registro como objeto de la clase Catedratico
   
-  getCursoCatedraticos(){} //Obtener de la BD, guardar cada registro como objeto de la clase CursoCatedrático
+  getCursoCatedraticos():void{
+    let nuevoArray: CursoCatedratico[]=[]
+    this.publicacion.getCursoCatedratico().subscribe(
+      res=>{
+        let catedraticos = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < catedraticos.length ; i++) {
+          nuevoArray.push(new CursoCatedratico(res[i].idCatedraticoCurso, new Curso(res[i].codigoCurso, res[i].nombre), new Catedratico(0, res[i].nombres, res[i].apellidos)));
+        }
+
+      },err=>{
+        console.log(err);
+      }
+    )
+    console.log(nuevoArray);
+    this.cursoCatedraticos = nuevoArray;
+  } //Obtener de la BD, guardar cada registro como objeto de la clase CursoCatedrático
 
   publicar(){
     if(this.mensajeValido()){

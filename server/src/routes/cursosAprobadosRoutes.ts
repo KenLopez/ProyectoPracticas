@@ -3,6 +3,7 @@ var mssql = require('mssql');
 
 var config = {
     server: 'localhost',
+    database: 'proyecto_practicas',
     host: 'localhost',
     user: 'ProyectoPracticas',
     password: '1234',
@@ -53,11 +54,11 @@ class CursosAprobadosRoutes{
             }
         });
 
-        //******************************************get cursos aprobados************************************************************ */
-        this.router.get('/getCursoAprobado', async function (req, res) {
+        //******************************************get Pensum************************************************************ */
+        this.router.get('/getPensum', async function (req, res) {
             try{
-                var cadena = "select * from CursosAprobados";
-                var con = new mssql.ConnectionPool(config);
+                var cadena = "Select PensumSistemas.idCursoPensum,Curso.nombre, PensumSistemas.creditos FROM (PensumSistemas JOIN Curso ON PensumSistemas.curso_CodigoCurso = Curso.codigoCurso);";                
+                 var con = new mssql.ConnectionPool(config);
 
                 con.connect(function(err:any){
                 var req = new mssql.Request(con);

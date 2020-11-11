@@ -1,0 +1,6 @@
+<div *ngIf="display == 0">
+    <app-log-in (iniciado)='iniciar_home($event)'></app-log-in>
+</div>
+<div *ngIf="display == 1">
+    <home [carnet]="carnet"></home>
+</div>

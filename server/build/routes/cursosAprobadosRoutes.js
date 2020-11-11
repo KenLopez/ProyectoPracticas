@@ -13,6 +13,7 @@ const express_1 = require("express");
 var mssql = require('mssql');
 var config = {
     server: 'localhost',
+    database: 'proyecto_practicas',
     host: 'localhost',
     user: 'ProyectoPracticas',
     password: '1234',
@@ -63,7 +64,7 @@ class CursosAprobadosRoutes {
         this.router.get('/getPensum', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    var cadena = "Select Curso.nombre,PensumSistemas.idCursoPensum,PensumSistemas.curso_codigoCurso, PensumSistemas.creditos, PensumSistemas.semestre FROM (PensumSistemas JOIN Curso ON PensumSistemas.curso_CodigoCurso = Curso.codigoCurso);";
+                    var cadena = "Select PensumSistemas.idCursoPensum,Curso.nombre, PensumSistemas.creditos FROM (PensumSistemas JOIN Curso ON PensumSistemas.curso_CodigoCurso = Curso.codigoCurso);";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);

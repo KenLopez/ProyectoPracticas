@@ -164,6 +164,59 @@ class CursosRoutes{
         }
     });
 
+//*********************************************************get contrasena************************************************************ */
+this.router.get('/auxiliar', async function (req, res) {
+    try{
+        var cadena = "select * from Auxiliar;";
+        var con = new mssql.ConnectionPool(config);
+
+        con.connect(function(err:any){
+        var req = new mssql.Request(con);
+        if(err){
+            console.log(err);
+            return;
+        }
+    req.query(cadena,function(err:any, recordset:any){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(JSON.stringify(recordset.recordsets[0]));
+            }
+            con.close();
+        });
+    });                
+    }catch(Exception){
+        console.log(Exception);
+    }
+});
+
+//*********************************************************get contrasena************************************************************ */
+this.router.get('/curso-auxiliar', async function (req, res) {
+    try{
+        var cadena = "select Curso_Catedratico.idCatedraticoCurso, Curso.codigoCurso, Curso.nombre,Auxiliar.nombres FROM ((Curso_Catedratico JOIN Curso ON Curso_Catedratico.curso_CodigoCurso=Curso.codigoCurso) JOIN Auxiliar ON Curso_Catedratico.auxiliar_NoAuxiliar = Auxiliar.noAuxiliar);";
+        var con = new mssql.ConnectionPool(config);
+
+        con.connect(function(err:any){
+        var req = new mssql.Request(con);
+        if(err){
+            console.log(err);
+            return;
+        }
+    req.query(cadena,function(err:any, recordset:any){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(JSON.stringify(recordset.recordsets[0]));
+            }
+            con.close();
+        });
+    });                
+    }catch(Exception){
+        console.log(Exception);
+    }
+});
 
     }
 }

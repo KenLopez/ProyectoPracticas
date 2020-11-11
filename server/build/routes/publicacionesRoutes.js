@@ -13,6 +13,7 @@ const express_1 = require("express");
 var mssql = require('mssql');
 var config = {
     server: 'localhost',
+    database: 'proyecto_practicas',
     host: 'localhost',
     user: 'ProyectoPracticas',
     password: '1234',
@@ -29,13 +30,13 @@ class PublicacionesRoutes {
     }
     config() {
         this.router.get('/', (req, res) => { res.send('esta es una publicacion'); });
-        //      **************** Anadir publicacion ******************
-        this.router.post('/nueva', function (req, res) {
+        //      **************** Anadir publicacion - curso ******************
+        this.router.post('/nuevaCurso', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
                     let resp = req.body;
-                    console.log(resp.carnet);
-                    var cadena = "insert into Publicacion values('" + resp.mensaje + "'," + resp.usuario_carnet + ",'" + resp.fecha + "'," + resp.curso_catedratico + "," + resp.codigo_curso + "," + resp.no_catedratico + "," + resp.tipo + ");";
+                    console.log(resp.mensaje);
+                    var cadena = "INSERT INTO Publicacion(mensaje,usuario_carnet,fecha,curso_CodigoCurso,tipo) values('" + resp.mensaje + "','" + resp.usuario_carnet + "','" + resp.fecha + "','" + resp.curso_CodigoCurso + "','" + resp.tipo + "');";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);
@@ -59,11 +60,13 @@ class PublicacionesRoutes {
                 }
             });
         });
-        //******************************************get publicacion************************************************************ */
-        this.router.get('/getPublicacion', function (req, res) {
+        //      **************** Anadir publicacion - catedratico ******************
+        this.router.post('/nuevaCatedratico', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    var cadena = "select * from Publicacion";
+                    let resp = req.body;
+                    console.log(resp.mensaje);
+                    var cadena = "INSERT INTO Publicacion(mensaje,usuario_carnet,fecha,catedratico_NoCatedratico,tipo) values('" + resp.mensaje + "','" + resp.usuario_carnet + "','" + resp.fecha + "','" + resp.catedratico_NoCatedratico + "','" + resp.tipo + "');";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);
@@ -76,7 +79,37 @@ class PublicacionesRoutes {
                                 console.log(err);
                             }
                             else {
-                                res.send(JSON.stringify(recordset.recordsets[0]));
+                                res.send(JSON.stringify(recordset));
+                            }
+                            con.close();
+                        });
+                    });
+                }
+                catch (Exception) {
+                    console.log(Exception);
+                }
+            });
+        });
+        //      **************** Anadir publicacion - curso-Catedratico ******************
+        this.router.post('/nuevaCursoCatedratico', function (req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    let resp = req.body;
+                    console.log(resp.mensaje);
+                    var cadena = "INSERT INTO Publicacion(mensaje,usuario_carnet,fecha,curso_Catedratico_idCatedraticoCurso,tipo) values('" + resp.mensaje + "','" + resp.usuario_carnet + "','" + resp.fecha + "','" + resp.curso_Catedratico_idCatedraticoCurso + "','" + resp.tipo + "');";
+                    var con = new mssql.ConnectionPool(config);
+                    con.connect(function (err) {
+                        var req = new mssql.Request(con);
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        req.query(cadena, function (err, recordset) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                res.send(JSON.stringify(recordset));
                             }
                             con.close();
                         });

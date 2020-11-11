@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Publicacion } from '../Classes/Publicacion';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'home',
@@ -8,12 +8,13 @@ import { Publicacion } from '../Classes/Publicacion';
 })
 export class HomeComponent implements OnInit {
 
-  publicaciones: Publicacion[] = []
+  @Input()carnet: number
+
 
   constructor() { }
 
   ngOnInit(): void {
-    //getPublicaciones();
+    console.log(this.carnet);
   }
 
   

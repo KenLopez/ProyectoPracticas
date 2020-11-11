@@ -3,6 +3,7 @@ var mssql = require('mssql');
 
 var config = {
     server: 'localhost',
+    database: 'proyecto_practicas',
     host: 'localhost',
     user: 'ProyectoPracticas',
     password: '1234',
@@ -24,12 +25,70 @@ class PublicacionesRoutes{
     config(): void{
         this.router.get('/', (req, res)=>{res.send('esta es una publicacion');});
 
-        //      **************** Anadir publicacion ******************
-        this.router.post('/nueva', async function (req, res) {
+        //      **************** Anadir publicacion - curso ******************
+        this.router.post('/nuevaCurso', async function (req, res) {
             try{
                 let resp = req.body;
-                console.log(resp.carnet);
-                var cadena = "insert into Publicacion values('"+resp.mensaje+"','"+resp.usuario_carnet+"','"+resp.fecha+"','"+resp.curso_catedratico+"','"+resp.codigo_curso+"','"+resp.no_catedratico+"','"+resp.tipo+"');";
+                console.log(resp.mensaje);
+                var cadena = "INSERT INTO Publicacion(mensaje,usuario_carnet,fecha,curso_CodigoCurso,tipo) values('"+resp.mensaje+"','"+resp.usuario_carnet+"','"+resp.fecha+"','"+resp.curso_CodigoCurso+"','"+resp.tipo+"');";
+                var con = new mssql.ConnectionPool(config);
+
+                con.connect(function(err:any){
+                var req = new mssql.Request(con);
+                if(err){
+                    console.log(err);
+                    return;
+                }
+            req.query(cadena,function(err:any, recordset:any){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.send(JSON.stringify(recordset));
+                    }
+                    con.close();
+                });
+            });                
+            }catch(Exception){
+                console.log(Exception);
+            }
+        });
+
+        //      **************** Anadir publicacion - catedratico ******************
+        this.router.post('/nuevaCatedratico', async function (req, res) {
+            try{
+                let resp = req.body;
+                console.log(resp.mensaje);
+                var cadena = "INSERT INTO Publicacion(mensaje,usuario_carnet,fecha,catedratico_NoCatedratico,tipo) values('"+resp.mensaje+"','"+resp.usuario_carnet+"','"+resp.fecha+"','"+resp.catedratico_NoCatedratico+"','"+resp.tipo+"');";
+                var con = new mssql.ConnectionPool(config);
+
+                con.connect(function(err:any){
+                var req = new mssql.Request(con);
+                if(err){
+                    console.log(err);
+                    return;
+                }
+            req.query(cadena,function(err:any, recordset:any){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.send(JSON.stringify(recordset));
+                    }
+                    con.close();
+                });
+            });                
+            }catch(Exception){
+                console.log(Exception);
+            }
+        });
+
+        //      **************** Anadir publicacion - curso-Catedratico ******************
+        this.router.post('/nuevaCursoCatedratico', async function (req, res) {
+            try{
+                let resp = req.body;
+                console.log(resp.mensaje);
+                var cadena = "INSERT INTO Publicacion(mensaje,usuario_carnet,fecha,curso_Catedratico_idCatedraticoCurso,tipo) values('"+resp.mensaje+"','"+resp.usuario_carnet+"','"+resp.fecha+"','"+resp.curso_Catedratico_idCatedraticoCurso+"','"+resp.tipo+"');";
                 var con = new mssql.ConnectionPool(config);
 
                 con.connect(function(err:any){
@@ -78,9 +137,6 @@ class PublicacionesRoutes{
                 console.log(Exception);
             }
         });
-
-
-
     }
 }
 

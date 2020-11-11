@@ -6,6 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { HomeComponent } from './home/home.component';
+import { SearchComponent } from './search/search.component';
+import { NuevaPublicacionComponent } from './nueva-publicacion/nueva-publicacion.component';
+import { NavegacionComponent } from './navegacion/navegacion.component';
+import { PublicacionComponent } from './publicacion/publicacion.component';
+import { EstudianteComponent } from './estudiante/estudiante.component';
 
 
 //Mario, agregue los modulos HttpClientModule y FormsModule
@@ -24,7 +30,13 @@ const routes: Route[] = [
     AppComponent,
     LogInComponent,
     SignInComponent,
-    RestartUserComponent
+    RestartUserComponent,
+    HomeComponent,
+    NuevaPublicacionComponent,
+    SearchComponent,
+    NavegacionComponent,
+    PublicacionComponent,
+    EstudianteComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,7 @@ import { PublicacionService } from '../services/publicacion.service';
 
 export class NuevaPublicacionComponent implements OnInit {
   mensaje: string;
-  //usuario: Usuario;
+  usuario: number;
   cursos: Curso[];
   catedraticos: Catedratico[];
   cursoCatedraticos: CursoCatedratico[];
@@ -57,12 +57,6 @@ export class NuevaPublicacionComponent implements OnInit {
   }
 
   getCursos(): void{
-<<<<<<< HEAD
-    var arreglo: Curso[] = [];
-    this.publicacion.getCursos().subscribe(
-      res=>{
-        console.log(res);
-=======
     let nuevoArray: Curso[]=[]
     this.publicacion.getCursos().subscribe(
       res=>{//console.log(res);
@@ -72,22 +66,12 @@ export class NuevaPublicacionComponent implements OnInit {
           nuevoArray.push(new Curso(res[i].codigoCurso, res[i].nombre));
         }
 
->>>>>>> cf69197e018cea088a0649c151fef4e168f6784b
       },err=>{
         console.log(err);
       }
     )
-<<<<<<< HEAD
-    /*let x = [{codigoCurso: 771, nombre: "IPC2"}, {codigoCurso: 770, nombre: "IPC1"} ]
-    for (let y of x){
-      arreglo.push(new Curso(y.codigoCurso, y.nombre))
-    };
-    this.cursos = arreglo;
-    console.log(this.cursos);*/
-=======
     console.log(nuevoArray);
     this.cursos = nuevoArray;
->>>>>>> cf69197e018cea088a0649c151fef4e168f6784b
   } //Obtener de BD, guardar cada registro como objeto de la clase Curso 
   
 
@@ -105,6 +89,7 @@ export class NuevaPublicacionComponent implements OnInit {
         console.log(err);
       }
     )
+    nuevoArray.push(new Catedratico(0, 'Segio Leonel', 'Gómez Bravo'));
     console.log(nuevoArray);
     this.catedraticos = nuevoArray;
   } //Obtener de BD, guardar cada registro como objeto de la clase Catedratico
@@ -125,7 +110,7 @@ export class NuevaPublicacionComponent implements OnInit {
     )
     console.log(nuevoArray);
     this.cursoCatedraticos = nuevoArray;
-  } //Obtener de la BD, guardar cada registro como objeto de la clase CursoCatedrático
+  } 
 
   publicar(){
     if(this.mensajeValido()){

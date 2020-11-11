@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Publicacion } from '../../Classes/Publicacion';
+import { Publicacion } from '../Classes/Publicacion';
 
 @Component({
   selector: 'home',

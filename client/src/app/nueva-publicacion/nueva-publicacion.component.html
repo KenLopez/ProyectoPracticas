@@ -1,6 +1,6 @@
 <div class="publicacion">
 
-    <h1><img src="https://www.flaticon.com/svg/static/icons/svg/684/684831.svg" width="50" height="50" alt="" loading="lazy"> ESCRIBE UNA PUBLICACIÓN</h1>
+    <h1><span class="iconify" data-icon="jam:write" data-inline="true"></span> ESCRIBE UNA PUBLICACIÓN</h1>
     <form (ngSubmit)="publicar()">
         <div class="tipos form-row">
             <p>Categoría:</p>
@@ -18,11 +18,11 @@
             </div>
             <div class="custom-control custom-radio">
                 <input class="custom-control-input" type="radio" name="tipoPublicacion" id="Tipo4" value="4" (change)="changeDisplay($event.target.value)">
-                <label class="custom-control-label" for="Tipo3">Curso-Catedrático</label>
+                <label class="custom-control-label" for="Tipo4">Auxiliar</label>
             </div>
             <div class="custom-control custom-radio">
-                <input class="custom-control-input" type="radio" name="tipoPublicacion" id="Tipo5" value="3" (change)="changeDisplay($event.target.value)">
-                <label class="custom-control-label" for="Tipo3">Curso-Catedrático</label>
+                <input class="custom-control-input" type="radio" name="tipoPublicacion" id="Tipo5" value="5" (change)="changeDisplay($event.target.value)">
+                <label class="custom-control-label" for="Tipo5">Curso-Auxiliar</label>
             </div>
         </div>
         <div class="selector">
@@ -38,6 +38,16 @@
             </select>
             <select class="form-control" id="exampleFormControlSelect1" *ngIf='display=="3"' name = "tema" (change)="changeIndex($event.target.value)">
                 <option *ngFor='let elemento of cursoCatedraticos; let i = index' [value]="i">
+                    {{elemento.toString()}}
+                </option>
+            </select>
+            <select class="form-control" id="exampleFormControlSelect1" *ngIf='display=="4"' name = "tema" (change)="changeIndex($event.target.value)">
+                <option *ngFor='let elemento of auxiliares; let i = index' [value]="i">
+                    {{elemento.toString()}}
+                </option>
+            </select>
+            <select class="form-control" id="exampleFormControlSelect1" *ngIf='display=="5"' name = "tema" (change)="changeIndex($event.target.value)">
+                <option *ngFor='let elemento of cursoAuxiliares; let i = index' [value]="i">
                     {{elemento.toString()}}
                 </option>
             </select>

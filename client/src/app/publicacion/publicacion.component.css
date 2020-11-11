@@ -2,13 +2,37 @@
     border:#2b3e50;
     border-radius: 10px;
     border-style: solid;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
     font-family: Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.iconify{
+    height: 30px;
+    width: 30px;
+}
+
+.catedratico{
+    background-color: #de934e;
+}
+
+.curso{
+    background-color: #54c465;
+}
+
+.cursoCat{
+    background-color: #8654c4;
+}
+
+.aux{
+    background-color: #c45454;
+}
+
+.auxCurso{
+    background-color: #c054c4;
 }
 
 h1{
     font-size: 20px;
-    background-color: #5981a6;
     padding-left: 40px;
     padding-bottom: 15px;
     padding-top: 15px;
@@ -26,6 +50,22 @@ h1{
     line-height: 24px;
     margin-right: 10px;
     margin-top: 10px;
+}
+
+.datos{
+    padding-right: 35px;
+    margin-top: 20px;
+    padding-left: 35px;
+}
+
+.datos h6{
+    text-align: right;
+}
+
+.msg p{
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-bottom: 20px;
 }
 
 .tipos p{
@@ -107,5 +147,3 @@ button:hover{
     border-color: #2b3e50;
     border-style: solid;
 }
-
-

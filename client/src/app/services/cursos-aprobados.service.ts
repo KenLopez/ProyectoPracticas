@@ -11,4 +11,8 @@ export class CursosAprobadosService {
   getPensum(){
     return this.httpClient.get('http://localhost:3000/cursoAprobado/getPensum');
   }
+
+  postCursosAprobados(data: any){
+    return this.httpClient.post('http://localhost:3000/cursoAprobado/nuevo',data);
+  }
 }

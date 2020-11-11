@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GuardsCheckStart } from '@angular/router';
 import { CursosAprobadosService } from '../services/cursos-aprobados.service';
 import { Curso } from './models/curso';
 
@@ -32,6 +33,22 @@ export class EstudianteComponent implements OnInit{
     )
     //console.log(nuevoArray);
     this.cursosArray = nuevoArray;
+  }
+
+  guardarAprobado(){
+    let curso: Curso = {
+      idCursoPensum: this.selectedCurso.idCursoPensum,
+      nombre: this.selectedCurso.nombre,
+      creditos: this.selectedCurso.creditos,
+      nota: this.selectedCurso.nota
+    }  
+    this.cursoAprobados.postCursosAprobados(curso).subscribe(
+      res=>{console.log(res);
+      console.log("Marquitos");},err=>{
+        console.log(err);
+      }
+    );
+
   }
   
   cursosArray: Curso[] = [
@@ -88,6 +105,8 @@ export class EstudianteComponent implements OnInit{
     this.selectedCurso = curso;
   }
 
+  
+
   addOrEdit(){
 
     if(this.selectedCurso.idCursoPensum == 0){
@@ -109,6 +128,9 @@ export class EstudianteComponent implements OnInit{
       this.selectedCurso = new Curso();
 
     }
+
+   
+
   }
 
 }

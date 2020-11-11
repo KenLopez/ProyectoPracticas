@@ -4,6 +4,8 @@ import { Catedratico } from '../Classes/Catedratico';
 import { CursoCatedratico } from '../Classes/CursoCatedratico';
 import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 import { PublicacionService } from '../services/publicacion.service';
+import { Publicacion } from '../nodes/Publicacion';
+import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view/util';
 
 @Component({
   selector: 'nueva-publicacion',
@@ -32,6 +34,8 @@ export class NuevaPublicacionComponent implements OnInit {
     this.display = "1";
     this.index = "0";
   }
+
+
 
   changeDisplay(numero: string){
     this.display = numero;
@@ -112,9 +116,51 @@ export class NuevaPublicacionComponent implements OnInit {
     this.cursoCatedraticos = nuevoArray;
   } 
 
+  addPublicacion(publicacion: Publicacion){
+    this.publicacion.addPublicacion(publicacion).subscribe(
+      res=>{
+        console.log(res);
+      },err=>{
+        console.log(err);
+      }
+    );
+  }
+
   publicar(){
     if(this.mensajeValido()){
       this.errorMensaje = "";
+      
+      let today = new Date()
+      const d = new Date(); 
+      
+      //console.log(today)
+
+      if(this.display == "1"){
+        console.log(this.mensaje);
+        console.log(this.cursos[this.index].toString());
+        let publicacion: Publicacion={
+          mensaje: this.mensaje,
+          usuario_carnet: 201900629,//this.usuario,
+          fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
+          curso_Catedratico_idCatedraticoCurso: null,
+          curso_CodigoCurso: this.cursos[this.index].codigoCurso,
+          catedratico_NoCatedratico: null,
+          tipo: 1
+        }
+
+        console.log(publicacion);
+
+        this.addPublicacion(publicacion);
+
+      }else if(this.display == "2"){
+        console.log(this.mensaje);
+        console.log(this.catedraticos[this.index].toString());
+
+      }else if(this.display == "3"){
+        console.log(this.mensaje);
+        console.log(this.cursoCatedraticos[this.index].toString());
+
+      }
       //Guardar en BD
     }else{
       this.errorMensaje = "Aún no has escrito ningún mensaje.";

@@ -5,7 +5,10 @@ import { CursoCatedratico } from '../Classes/CursoCatedratico';
 import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 import { PublicacionService } from '../services/publicacion.service';
 import { Publicacion } from '../nodes/Publicacion';
+import { Auxiliar } from '../Classes/Auxiliar';
+import { CursoAuxiliar } from '../Classes/CursoAuxiliar';
 import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view/util';
+
 
 @Component({
   selector: 'nueva-publicacion',
@@ -19,6 +22,8 @@ export class NuevaPublicacionComponent implements OnInit {
   cursos: Curso[];
   catedraticos: Catedratico[];
   cursoCatedraticos: CursoCatedratico[];
+  auxiliares: Auxiliar[];
+  cursosAuxiliar: CursoAuxiliar[];
   display: string;
   index: string;
   errorMensaje: string;
@@ -31,6 +36,8 @@ export class NuevaPublicacionComponent implements OnInit {
     this.cursos = [];
     this.catedraticos = [];
     this.cursoCatedraticos = [];
+    this.auxiliares = [];
+    this.cursosAuxiliar = [];
     this.display = "1";
     this.index = "0";
   }
@@ -45,6 +52,10 @@ export class NuevaPublicacionComponent implements OnInit {
       this.getCatedraticos()
     }else if(this.display == "3"){
       this.getCursoCatedraticos()
+    }else if(this.display == "4"){
+      this.getAuxiliares() 
+    }else if(this.display == "5"){
+      this.getCursoAuxiliares()
     }
   }
 
@@ -93,7 +104,6 @@ export class NuevaPublicacionComponent implements OnInit {
         console.log(err);
       }
     )
-    nuevoArray.push(new Catedratico(0, 'Segio Leonel', 'Gómez Bravo'));
     console.log(nuevoArray);
     this.catedraticos = nuevoArray;
   } //Obtener de BD, guardar cada registro como objeto de la clase Catedratico
@@ -115,6 +125,42 @@ export class NuevaPublicacionComponent implements OnInit {
     console.log(nuevoArray);
     this.cursoCatedraticos = nuevoArray;
   } 
+
+  getCursoAuxiliares(){
+    let nuevoArray: CursoAuxiliar[]=[]
+    this.publicacion.getCursoAuxiliar().subscribe(
+      res=>{
+        let auxiliares = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < auxiliares.length ; i++) {
+          nuevoArray.push(new CursoAuxiliar(res[i].idCatedraticoCurso, new Curso(res[i].codigoCurso, res[i].nombre), new Auxiliar(0, res[i].nombres)));
+        }
+
+      },err=>{
+        console.log(err);
+      }
+    )
+    console.log(nuevoArray);
+    this.cursosAuxiliar = nuevoArray;
+  }
+
+  getAuxiliares(){
+    let nuevoArray: Auxiliar[]=[]
+    this.publicacion.getAuxiliar().subscribe(
+      res=>{
+        let auxiliares = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < auxiliares.length ; i++) {
+          nuevoArray.push(new Auxiliar(res[i].noAuxiliar, res[i].nombres));
+        }
+
+      },err=>{
+        console.log(err);
+      }
+    )
+    console.log(nuevoArray);
+    this.auxiliares = nuevoArray;
+  }
 
   addPublicacionCurso(publicacion: Publicacion){
     this.publicacion.addPublicacionCurso(publicacion).subscribe(
@@ -149,6 +195,28 @@ export class NuevaPublicacionComponent implements OnInit {
     console.log(publicacion)
   }
 
+  addPublicacionAuxiliar(publicacion: Publicacion){
+    this.publicacion.addPublicacionAuxiliar(publicacion).subscribe(
+      res=>{
+        console.log(res);
+      },err=>{
+        console.log(err);
+      }
+    );
+    console.log(publicacion)
+  }
+
+  addPublicacioncursoAuxiliar(publicacion: Publicacion){
+    this.publicacion.addPublicacionAuxiliarCurso(publicacion).subscribe(
+      res=>{
+        console.log(res);
+      },err=>{
+        console.log(err);
+      }
+    );
+    console.log(publicacion)
+  }
+
   publicar(){
     if(this.mensajeValido()){
       this.errorMensaje = "";
@@ -166,9 +234,7 @@ export class NuevaPublicacionComponent implements OnInit {
           mensaje: this.mensaje,
           usuario_carnet: 201900629,//this.usuario,
           fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
-          curso_Catedratico_idCatedraticoCurso: null,
           curso_CodigoCurso: this.cursos[this.index].codigoCurso,
-          catedratico_NoCatedratico: null,
           tipo: 1
         }
 
@@ -184,8 +250,6 @@ export class NuevaPublicacionComponent implements OnInit {
           mensaje: this.mensaje,
           usuario_carnet: 201900629,//this.usuario,
           fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
-          curso_Catedratico_idCatedraticoCurso: null,
-          curso_CodigoCurso: null,
           catedratico_NoCatedratico: this.catedraticos[this.index].noCatedratico,
           tipo: 2
         }
@@ -203,14 +267,44 @@ export class NuevaPublicacionComponent implements OnInit {
           usuario_carnet: 201900629,//this.usuario,
           fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
           curso_Catedratico_idCatedraticoCurso: this.cursoCatedraticos[this.index].id,
-          curso_CodigoCurso: null,
-          catedratico_NoCatedratico: null,
           tipo: 3
         }
 
         console.log(publicacion);
 
         this.addPublicacionCursoCatedratico(publicacion);
+
+      }else if(this.display == "4"){
+        console.log(this.mensaje);
+        console.log(this.auxiliares[this.index].toString());
+
+        let publicacion: Publicacion={
+          mensaje: this.mensaje,
+          usuario_carnet: 201900629,//this.usuario,
+          fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
+          auxiliar_idAuxiliar: this.auxiliares[this.index].noAuxiliar,
+          tipo: 4
+        }
+
+        console.log(publicacion);
+
+        this.addPublicacionAuxiliar(publicacion);
+
+      }else if(this.display == "5"){
+        console.log(this.mensaje);
+        console.log(this.cursosAuxiliar[this.index].toString());
+
+        let publicacion: Publicacion={
+          mensaje: this.mensaje,
+          usuario_carnet: 201900629,//this.usuario,
+          fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
+          auxiliar_Curso: this.cursosAuxiliar[this.index].id,
+          tipo: 5
+        }
+
+        console.log(publicacion);
+
+        this.addPublicacioncursoAuxiliar(publicacion);
 
       }
       //Guardar en BD
@@ -227,6 +321,7 @@ export class NuevaPublicacionComponent implements OnInit {
 
   mensajeValido(){
     if(this.mensaje != ""){
+
       return true;
     }else{
       return false;

@@ -3,9 +3,9 @@ import { CursosAprobadosService } from '../services/cursos-aprobados.service';
 import { Curso } from './models/curso';
 
 @Component({
-  selector: 'estudiante',
-  templateUrl: './estudiante.component.html',
-  styleUrls: ['./estudiante.component.css']
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class EstudianteComponent implements OnInit{
 

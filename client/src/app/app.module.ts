@@ -11,18 +11,19 @@ import { SearchComponent } from './search/search.component';
 import { NuevaPublicacionComponent } from './nueva-publicacion/nueva-publicacion.component';
 import { NavegacionComponent } from './navegacion/navegacion.component';
 import { PublicacionComponent } from './publicacion/publicacion.component';
-import { EstudianteComponent } from './estudiante/estudiante.component';
 
 
 //Mario, agregue los modulos HttpClientModule y FormsModule
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { RestartUserComponent } from './restart-user/restart-user.component';
+import { ParentComponentComponent } from './parent-component/parent-component.component';
 
 const routes: Route[] = [
-  {path: '', component: LogInComponent},
+  {path: '', component: ParentComponentComponent},
   {path:'SignIn', component: SignInComponent},
-  {path:'ForgotPw', component: RestartUserComponent}
+  {path:'ForgotPw', component: RestartUserComponent},
+  {path:'Home', component: HomeComponent}
 ];
 
 @NgModule({
@@ -35,8 +36,8 @@ const routes: Route[] = [
     NuevaPublicacionComponent,
     SearchComponent,
     NavegacionComponent,
-    PublicacionComponent,
-    EstudianteComponent,
+    ParentComponentComponent,
+    PublicacionComponent
   ],
   imports: [
     BrowserModule,

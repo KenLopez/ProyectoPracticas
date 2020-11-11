@@ -7,6 +7,7 @@ import { PublicacionService } from '../services/publicacion.service';
 import { Publicacion } from '../nodes/Publicacion';
 import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view/util';
 
+
 @Component({
   selector: 'nueva-publicacion',
   templateUrl: './nueva-publicacion.component.html',
@@ -45,6 +46,10 @@ export class NuevaPublicacionComponent implements OnInit {
       this.getCatedraticos()
     }else if(this.display == "3"){
       this.getCursoCatedraticos()
+    }else if(this.display == "4"){
+      //this.getAuxiliares() 
+    }else if(this.display == "5"){
+      //this.getCursoAuxiliares()
     }
   }
 
@@ -93,7 +98,6 @@ export class NuevaPublicacionComponent implements OnInit {
         console.log(err);
       }
     )
-    nuevoArray.push(new Catedratico(0, 'Segio Leonel', 'Gómez Bravo'));
     console.log(nuevoArray);
     this.catedraticos = nuevoArray;
   } //Obtener de BD, guardar cada registro como objeto de la clase Catedratico
@@ -227,6 +231,7 @@ export class NuevaPublicacionComponent implements OnInit {
 
   mensajeValido(){
     if(this.mensaje != ""){
+
       return true;
     }else{
       return false;

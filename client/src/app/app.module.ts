@@ -11,7 +11,6 @@ import { SearchComponent } from './search/search.component';
 import { NuevaPublicacionComponent } from './nueva-publicacion/nueva-publicacion.component';
 import { NavegacionComponent } from './navegacion/navegacion.component';
 import { PublicacionComponent } from './publicacion/publicacion.component';
-import { EstudianteComponent } from './estudiante/estudiante.component';
 
 
 //Mario, agregue los modulos HttpClientModule y FormsModule
@@ -38,6 +37,7 @@ const routes: Route[] = [
     SearchComponent,
     NavegacionComponent,
     ParentComponentComponent
+    PublicacionComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { Curso } from '../Classes/Curso';
 import { Catedratico } from '../Classes/Catedratico';
 import { CursoCatedratico } from '../Classes/CursoCatedratico';
 import { isGeneratedFile } from '@angular/compiler/src/aot/util';
+import { PublicacionService } from '../services/publicacion.service';
 
 @Component({
   selector: 'nueva-publicacion',
@@ -12,7 +13,7 @@ import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 
 export class NuevaPublicacionComponent implements OnInit {
   mensaje: string;
-  //usuario: Usuario;
+  usuario: number;
   cursos: Curso[];
   catedraticos: Catedratico[];
   cursoCatedraticos: CursoCatedratico[];
@@ -20,7 +21,7 @@ export class NuevaPublicacionComponent implements OnInit {
   index: string;
   errorMensaje: string;
 
-  constructor() { 
+  constructor(private publicacion:PublicacionService) { 
     this.mensaje = "";
     this.errorMensaje = "";
     //this.usuario = new Usuario();
@@ -35,11 +36,11 @@ export class NuevaPublicacionComponent implements OnInit {
   changeDisplay(numero: string){
     this.display = numero;
     if(this.display == "1"){
-      //getCursos()
+      this.getCursos()
     }else if(this.display == "2"){
-      //getCatedraticos()
+      this.getCatedraticos()
     }else if(this.display == "3"){
-      //getCursoCatedraticos()
+      this.getCursoCatedraticos()
     }
   }
 
@@ -48,19 +49,68 @@ export class NuevaPublicacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cursos.push(new Curso(1, "Prácticas Iniciales"));
+    /*this.cursos.push(new Curso(1, "Prácticas Iniciales"));
     this.cursos.push(new Curso(2, "Prácticas Iniciales"));
     this.catedraticos.push(new Catedratico(1, "Sergio", "Gómez Bravo"));
-    this.cursoCatedraticos.push(new CursoCatedratico(1, new Curso(1, "Prácticas Iniciales"), new Catedratico(1, "Sergio", "Gómez Bravo")))
-    //getCursos()
+    this.cursoCatedraticos.push(new CursoCatedratico(1, new Curso(1, "Prácticas Iniciales"), new Catedratico(1, "Sergio", "Gómez Bravo")))*/
+    this.getCursos()
   }
 
-  getCursos(){} //Obtener de BD, guardar cada registro como objeto de la clase Curso 
+  getCursos(): void{
+    let nuevoArray: Curso[]=[]
+    this.publicacion.getCursos().subscribe(
+      res=>{//console.log(res);
+        let cursos = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < cursos.length ; i++) {
+          nuevoArray.push(new Curso(res[i].codigoCurso, res[i].nombre));
+        }
+
+      },err=>{
+        console.log(err);
+      }
+    )
+    console.log(nuevoArray);
+    this.cursos = nuevoArray;
+  } //Obtener de BD, guardar cada registro como objeto de la clase Curso 
   
 
-  getCatedraticos(){} //Obtener de BD, guardar cada registro como objeto de la clase Catedratico
+  getCatedraticos(): void{
+    let nuevoArray: Catedratico[]=[]
+    this.publicacion.getCatedraticos().subscribe(
+      res=>{
+        let catedraticos = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < catedraticos.length ; i++) {
+          nuevoArray.push(new Catedratico(res[i].noCatedratico, res[i].nombres, res[i].apellidos));
+        }
+
+      },err=>{
+        console.log(err);
+      }
+    )
+    nuevoArray.push(new Catedratico(0, 'Segio Leonel', 'Gómez Bravo'));
+    console.log(nuevoArray);
+    this.catedraticos = nuevoArray;
+  } //Obtener de BD, guardar cada registro como objeto de la clase Catedratico
   
-  getCursoCatedraticos(){} //Obtener de la BD, guardar cada registro como objeto de la clase CursoCatedrático
+  getCursoCatedraticos():void{
+    let nuevoArray: CursoCatedratico[]=[]
+    this.publicacion.getCursoCatedratico().subscribe(
+      res=>{
+        let catedraticos = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < catedraticos.length ; i++) {
+          nuevoArray.push(new CursoCatedratico(res[i].idCatedraticoCurso, new Curso(res[i].codigoCurso, res[i].nombre), new Catedratico(0, res[i].nombres, res[i].apellidos)));
+        }
+
+      },err=>{
+        console.log(err);
+      }
+    )
+    console.log(nuevoArray);
+    this.cursoCatedraticos = nuevoArray;
+  } 
 
   publicar(){
     if(this.mensajeValido()){

@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Curso } from './models/curso';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'estudiante',
+  templateUrl: './estudiante.component.html',
+  styleUrls: ['./estudiante.component.css']
 })
-export class AppComponent {
+export class EstudianteComponent {
   
   cursosArray: Curso[] = [
     {id:1, nombre: 'IPC1', creditos: 4},

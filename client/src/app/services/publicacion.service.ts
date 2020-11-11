@@ -38,4 +38,12 @@ export class PublicacionService {
   addPublicacionCursoCatedratico(data:any){
     return this.httpClient.post('http://localhost:3000/publicacion/nuevaCursoCatedratico',data);
   }
+
+  addPublicacionAuxiliar(data:any){
+    return this.httpClient.post('http://localhost:3000/publicacion/nuevaAuxiliar',data);
+  }
+
+  addPublicacionAuxiliarCurso(data:any){
+    return this.httpClient.post('http://localhost:3000/publicacion/nuevaAuxiliarCurso',data);
+  }
 }

@@ -26,7 +26,7 @@ class CursosRoutes{
         this.router.get('/', (req, res)=>{res.send('esta es una publicacion');});
 
 
-//*********************************************************get carnet************************************************************ */
+//*********************************************************get curso************************************************************ */
         this.router.get('/getCurso', async function (req, res) {
             try{
                 var cadena = "select * from Curso";
@@ -54,7 +54,7 @@ class CursosRoutes{
         });
 
 
-//*********************************************************get contrasena************************************************************ */
+//*********************************************************get catedratico************************************************************ */
         this.router.get('/catedratico', async function (req, res) {
             try{
                 var cadena = "Select * from Catedratico";
@@ -66,7 +66,7 @@ class CursosRoutes{
                     console.log(err);
                     return;
                 }
-            req.query(cadena,function(err:any, recordset:any){
+                req.query(cadena,function(err:any, recordset:any){
                     if(err){
                         console.log(err);
                     }
@@ -81,32 +81,88 @@ class CursosRoutes{
             }
         });
 
-//*********************************************************get contrasena************************************************************ */
-this.router.get('/curso-catedratico', async function (req, res) {
-    try{
-        var cadena = "select Curso_Catedratico.idCatedraticoCurso, Curso.codigoCurso,Curso.nombre,Catedratico.nombres,Catedratico.apellidos FROM ((Curso_Catedratico JOIN Curso ON Curso_Catedratico.curso_CodigoCurso=Curso.codigoCurso) JOIN Catedratico ON Curso_Catedratico.catedratico_NoCatedratico=Catedratico.noCatedratico);";
-        var con = new mssql.ConnectionPool(config);
+//*********************************************************get curso-catedratico************************************************************ */
+    this.router.get('/curso-catedratico', async function (req, res) {
+        try{
+            var cadena = "select Curso_Catedratico.idCatedraticoCurso, Curso.codigoCurso, Curso.nombre, Catedratico.nombres, Catedratico.apellidos FROM ((Curso_Catedratico JOIN Curso ON Curso_Catedratico.curso_CodigoCurso=Curso.codigoCurso) JOIN Catedratico ON Curso_Catedratico.catedratico_NoCatedratico=Catedratico.noCatedratico);";
+            var con = new mssql.ConnectionPool(config);
 
-        con.connect(function(err:any){
-        var req = new mssql.Request(con);
-        if(err){
-            console.log(err);
-            return;
-        }
-    req.query(cadena,function(err:any, recordset:any){
+            con.connect(function(err:any){
+            var req = new mssql.Request(con);
             if(err){
                 console.log(err);
+                return;
             }
-            else{
-                res.send(JSON.stringify(recordset.recordsets[0]));
-            }
-            con.close();
-        });
-    });                
-    }catch(Exception){
-        console.log(Exception);
-    }
-});
+        req.query(cadena,function(err:any, recordset:any){
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    res.send(JSON.stringify(recordset.recordsets[0]));
+                }
+                con.close();
+            });
+        });                
+        }catch(Exception){
+            console.log(Exception);
+        }
+    });
+
+//*********************************************************get auxiliar************************************************************ */
+    this.router.get('/auxiliar', async function (req, res) {
+        try{
+            var cadena = "Select * from Auxiliar";
+            var con = new mssql.ConnectionPool(config);
+
+            con.connect(function(err:any){
+                var req = new mssql.Request(con);
+                if(err){
+                    console.log(err);                    
+                    return;
+                }
+                req.query(cadena,function(err:any, recordset:any){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.send(JSON.stringify(recordset.recordsets[0]));
+                    }
+                    con.close();
+                });
+            });   
+
+        }catch(Exception){
+            console.log(Exception);
+        }
+    });
+
+//*********************************************************get auxiliar************************************************************ */
+    this.router.get('/curso-auxiliar', async function (req, res) {
+        try{
+            var cadena = "Select Curso_Catedratico.auxiliar_NoAuxiliar, Curso.codigoCurso, Curso.nombre, Auxiliar.nombres FROM ((Curso_Catedratico JOIN Curso ON Curso_Catedratico.curso_CodigoCurso=Curso.codigoCurso) JOIN Auxiliar ON Curso_Catedratico.auxiliar_NoAuxiliar=Auxiliar.noAuxiliar)";
+            var con = new mssql.ConnectionPool(config);
+
+            con.connect(function(err:any){
+                var req = new mssql.Request(con);
+                if(err){
+                    console.log(err);                    
+                    return;
+                }
+                req.query(cadena,function(err:any, recordset:any){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.send(JSON.stringify(recordset.recordsets[0]));
+                    }
+                    con.close();
+                });
+            });   
+
+        }catch(Exception){
+            console.log(Exception);
+        }
+    });
 
 
     }

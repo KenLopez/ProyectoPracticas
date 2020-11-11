@@ -3,6 +3,9 @@ import { Curso } from '../Classes/Curso';
 import { Catedratico } from '../Classes/Catedratico';
 import { CursoCatedratico } from '../Classes/CursoCatedratico';
 import { isGeneratedFile } from '@angular/compiler/src/aot/util';
+import { PublicacionService } from '../services/publicacion.service';
+import { Publicacion } from '../nodes/Publicacion';
+import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view/util';
 
 @Component({
   selector: 'nueva-publicacion',
@@ -12,7 +15,7 @@ import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 
 export class NuevaPublicacionComponent implements OnInit {
   mensaje: string;
-  //usuario: Usuario;
+  usuario: number;
   cursos: Curso[];
   catedraticos: Catedratico[];
   cursoCatedraticos: CursoCatedratico[];
@@ -20,7 +23,7 @@ export class NuevaPublicacionComponent implements OnInit {
   index: string;
   errorMensaje: string;
 
-  constructor() { 
+  constructor(private publicacion:PublicacionService) { 
     this.mensaje = "";
     this.errorMensaje = "";
     //this.usuario = new Usuario();
@@ -32,14 +35,16 @@ export class NuevaPublicacionComponent implements OnInit {
     this.index = "0";
   }
 
+
+
   changeDisplay(numero: string){
     this.display = numero;
     if(this.display == "1"){
-      //getCursos()
+      this.getCursos()
     }else if(this.display == "2"){
-      //getCatedraticos()
+      this.getCatedraticos()
     }else if(this.display == "3"){
-      //getCursoCatedraticos()
+      this.getCursoCatedraticos()
     }
   }
 
@@ -48,27 +53,172 @@ export class NuevaPublicacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cursos.push(new Curso(1, "Prácticas Iniciales"));
+    /*this.cursos.push(new Curso(1, "Prácticas Iniciales"));
     this.cursos.push(new Curso(2, "Prácticas Iniciales"));
     this.catedraticos.push(new Catedratico(1, "Sergio", "Gómez Bravo"));
-    this.cursoCatedraticos.push(new CursoCatedratico(1, new Curso(1, "Prácticas Iniciales"), new Catedratico(1, "Sergio", "Gómez Bravo")))
-    //getCursos()
+    this.cursoCatedraticos.push(new CursoCatedratico(1, new Curso(1, "Prácticas Iniciales"), new Catedratico(1, "Sergio", "Gómez Bravo")))*/
+    this.getCursos()
   }
 
-  getCursos(){} //Obtener de BD, guardar cada registro como objeto de la clase Curso 
+  getCursos(): void{
+    let nuevoArray: Curso[]=[]
+    this.publicacion.getCursos().subscribe(
+      res=>{//console.log(res);
+        let cursos = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < cursos.length ; i++) {
+          nuevoArray.push(new Curso(res[i].codigoCurso, res[i].nombre));
+        }
+
+      },err=>{
+        console.log(err);
+      }
+    )
+    console.log(nuevoArray);
+    this.cursos = nuevoArray;
+  } //Obtener de BD, guardar cada registro como objeto de la clase Curso 
   
 
-  getCatedraticos(){} //Obtener de BD, guardar cada registro como objeto de la clase Catedratico
+  getCatedraticos(): void{
+    let nuevoArray: Catedratico[]=[]
+    this.publicacion.getCatedraticos().subscribe(
+      res=>{
+        let catedraticos = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < catedraticos.length ; i++) {
+          nuevoArray.push(new Catedratico(res[i].noCatedratico, res[i].nombres, res[i].apellidos));
+        }
+
+      },err=>{
+        console.log(err);
+      }
+    )
+    nuevoArray.push(new Catedratico(0, 'Segio Leonel', 'Gómez Bravo'));
+    console.log(nuevoArray);
+    this.catedraticos = nuevoArray;
+  } //Obtener de BD, guardar cada registro como objeto de la clase Catedratico
   
-  getCursoCatedraticos(){} //Obtener de la BD, guardar cada registro como objeto de la clase CursoCatedrático
+  getCursoCatedraticos():void{
+    let nuevoArray: CursoCatedratico[]=[]
+    this.publicacion.getCursoCatedratico().subscribe(
+      res=>{
+        let catedraticos = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < catedraticos.length ; i++) {
+          nuevoArray.push(new CursoCatedratico(res[i].idCatedraticoCurso, new Curso(res[i].codigoCurso, res[i].nombre), new Catedratico(0, res[i].nombres, res[i].apellidos)));
+        }
+
+      },err=>{
+        console.log(err);
+      }
+    )
+    console.log(nuevoArray);
+    this.cursoCatedraticos = nuevoArray;
+  } 
+
+  addPublicacionCurso(publicacion: Publicacion){
+    this.publicacion.addPublicacionCurso(publicacion).subscribe(
+      res=>{
+        console.log(res);
+      },err=>{
+        console.log(err);
+      }
+    );
+    console.log(publicacion)
+  }
+
+  addPublicacionCatedratico(publicacion: Publicacion){
+    this.publicacion.addPublicacionCatedratico(publicacion).subscribe(
+      res=>{
+        console.log(res);
+      },err=>{
+        console.log(err);
+      }
+    );
+    console.log(publicacion)
+  }
+
+  addPublicacionCursoCatedratico(publicacion: Publicacion){
+    this.publicacion.addPublicacionCursoCatedratico(publicacion).subscribe(
+      res=>{
+        console.log(res);
+      },err=>{
+        console.log(err);
+      }
+    );
+    console.log(publicacion)
+  }
 
   publicar(){
     if(this.mensajeValido()){
       this.errorMensaje = "";
+      
+      let today = new Date()
+      const d = new Date(); 
+      
+      //console.log(today)
+
+      if(this.display == "1"){
+        console.log(this.mensaje);
+        console.log(this.cursos[this.index].toString());
+        
+        let publicacion: Publicacion={
+          mensaje: this.mensaje,
+          usuario_carnet: 201900629,//this.usuario,
+          fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
+          curso_Catedratico_idCatedraticoCurso: null,
+          curso_CodigoCurso: this.cursos[this.index].codigoCurso,
+          catedratico_NoCatedratico: null,
+          tipo: 1
+        }
+
+        console.log(publicacion);
+
+        this.addPublicacionCurso(publicacion);
+
+      }else if(this.display == "2"){
+        console.log(this.mensaje);
+        console.log(this.catedraticos[this.index].toString());
+
+        let publicacion: Publicacion={
+          mensaje: this.mensaje,
+          usuario_carnet: 201900629,//this.usuario,
+          fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
+          curso_Catedratico_idCatedraticoCurso: null,
+          curso_CodigoCurso: null,
+          catedratico_NoCatedratico: this.catedraticos[this.index].noCatedratico,
+          tipo: 2
+        }
+
+        console.log(publicacion);
+
+        this.addPublicacionCatedratico(publicacion);
+
+      }else if(this.display == "3"){
+        console.log(this.mensaje);
+        console.log(this.cursoCatedraticos[this.index].toString());
+
+        let publicacion: Publicacion={
+          mensaje: this.mensaje,
+          usuario_carnet: 201900629,//this.usuario,
+          fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
+          curso_Catedratico_idCatedraticoCurso: this.cursoCatedraticos[this.index].id,
+          curso_CodigoCurso: null,
+          catedratico_NoCatedratico: null,
+          tipo: 3
+        }
+
+        console.log(publicacion);
+
+        this.addPublicacionCursoCatedratico(publicacion);
+
+      }
       //Guardar en BD
     }else{
       this.errorMensaje = "Aún no has escrito ningún mensaje.";
     }
+
+    this.mensaje = "";
   }
 
   quitarError(){

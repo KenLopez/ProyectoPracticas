@@ -1,13 +1,13 @@
 export class Curso{
-    codigo: number;
+    codigoCurso: number;
     nombre: string;
 
     constructor(codigo: number, nombre: string){
-        this.codigo = codigo;
+        this.codigoCurso = codigo;
         this.nombre = nombre;
     }
 
     toString(){
-        return this.codigo.toString().concat(" - ", this.nombre)
+        return this.codigoCurso.toString().concat(" - ", this.nombre)
     }
 }

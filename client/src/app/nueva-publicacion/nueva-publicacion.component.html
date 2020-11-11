@@ -47,7 +47,7 @@
                 </option>
             </select>
             <select class="form-control" id="exampleFormControlSelect1" *ngIf='display=="5"' name = "tema" (change)="changeIndex($event.target.value)">
-                <option *ngFor='let elemento of cursoAuxiliares; let i = index' [value]="i">
+                <option *ngFor='let elemento of cursosAuxiliar; let i = index' [value]="i">
                     {{elemento.toString()}}
                 </option>
             </select>

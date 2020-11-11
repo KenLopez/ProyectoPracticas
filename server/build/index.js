@@ -9,6 +9,7 @@ const publicacionesRoutes_1 = __importDefault(require("./routes/publicacionesRou
 const usuariosRoutes_1 = __importDefault(require("./routes/usuariosRoutes"));
 const comentariosRoutes_1 = __importDefault(require("./routes/comentariosRoutes"));
 const cursosAprobadosRoutes_1 = __importDefault(require("./routes/cursosAprobadosRoutes"));
+const cursosRoutes_1 = __importDefault(require("./routes/cursosRoutes"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 class Server {
@@ -29,7 +30,8 @@ class Server {
         this.app.use('/publicacion', publicacionesRoutes_1.default);
         this.app.use('/usuario', usuariosRoutes_1.default);
         this.app.use('/comentario', comentariosRoutes_1.default);
-        this.app.use('/cursoAprobado', cursosAprobadosRoutes_1.default);
+        this.app.use('/cursoAprobado', cursosAprobadosRoutes_1.default),
+            this.app.use('/cursos', cursosRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {

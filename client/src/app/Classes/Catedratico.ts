@@ -1,12 +1,12 @@
 import { stringify } from "querystring";
 
 export class Catedratico{
-    numero: number;
+    noCatedratico: number;
     nombres: string;
     apellidos: string;
 
     constructor(numero: number, nombres: string, apellidos: string){
-        this.numero = numero;
+        this.noCatedratico = numero;
         this.nombres = nombres;
         this.apellidos = apellidos;
     }
@@ -16,6 +16,6 @@ export class Catedratico{
     }
 
     toString(){
-        return this.numero.toString().concat(" - ", this.nombreCompleto())
+        return this.noCatedratico.toString().concat(" - ", this.nombreCompleto())
     }
 }

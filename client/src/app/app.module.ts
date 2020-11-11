@@ -36,8 +36,8 @@ const routes: Route[] = [
     NuevaPublicacionComponent,
     SearchComponent,
     NavegacionComponent,
-    ParentComponentComponent
-    PublicacionComponent,
+    ParentComponentComponent,
+    PublicacionComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,8 @@ import { CursoCatedratico } from '../Classes/CursoCatedratico';
 import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 import { PublicacionService } from '../services/publicacion.service';
 import { Publicacion } from '../nodes/Publicacion';
+import { Auxiliar } from '../Classes/Auxiliar';
+import { CursoAuxiliar } from '../Classes/CursoAuxiliar';
 import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view/util';
 
 
@@ -20,6 +22,8 @@ export class NuevaPublicacionComponent implements OnInit {
   cursos: Curso[];
   catedraticos: Catedratico[];
   cursoCatedraticos: CursoCatedratico[];
+  auxiliares: Auxiliar[];
+  cursosAuxiliar: CursoAuxiliar[];
   display: string;
   index: string;
   errorMensaje: string;
@@ -32,6 +36,8 @@ export class NuevaPublicacionComponent implements OnInit {
     this.cursos = [];
     this.catedraticos = [];
     this.cursoCatedraticos = [];
+    this.auxiliares = [];
+    this.cursosAuxiliar = [];
     this.display = "1";
     this.index = "0";
   }
@@ -47,9 +53,9 @@ export class NuevaPublicacionComponent implements OnInit {
     }else if(this.display == "3"){
       this.getCursoCatedraticos()
     }else if(this.display == "4"){
-      //this.getAuxiliares() 
+      this.getAuxiliares() 
     }else if(this.display == "5"){
-      //this.getCursoAuxiliares()
+      this.getCursoAuxiliares()
     }
   }
 
@@ -119,6 +125,42 @@ export class NuevaPublicacionComponent implements OnInit {
     console.log(nuevoArray);
     this.cursoCatedraticos = nuevoArray;
   } 
+
+  getCursoAuxiliares(){
+    let nuevoArray: CursoAuxiliar[]=[]
+    this.publicacion.getCursoAuxiliar().subscribe(
+      res=>{
+        let auxiliares = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < auxiliares.length ; i++) {
+          nuevoArray.push(new CursoAuxiliar(res[i].idCatedraticoCurso, new Curso(res[i].codigoCurso, res[i].nombre), new Auxiliar(0, res[i].nombres)));
+        }
+
+      },err=>{
+        console.log(err);
+      }
+    )
+    console.log(nuevoArray);
+    this.cursosAuxiliar = nuevoArray;
+  }
+
+  getAuxiliares(){
+    let nuevoArray: Auxiliar[]=[]
+    this.publicacion.getAuxiliar().subscribe(
+      res=>{
+        let auxiliares = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < auxiliares.length ; i++) {
+          nuevoArray.push(new Auxiliar(res[i].noAuxiliar, res[i].nombres));
+        }
+
+      },err=>{
+        console.log(err);
+      }
+    )
+    console.log(nuevoArray);
+    this.auxiliares = nuevoArray;
+  }
 
   addPublicacionCurso(publicacion: Publicacion){
     this.publicacion.addPublicacionCurso(publicacion).subscribe(

@@ -4,6 +4,8 @@ import { Catedratico } from '../Classes/Catedratico';
 import { CursoCatedratico } from '../Classes/CursoCatedratico';
 import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 import { PublicacionService } from '../services/publicacion.service';
+import { Publicacion } from '../nodes/Publicacion';
+import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view/util';
 
 @Component({
   selector: 'nueva-publicacion',
@@ -13,7 +15,7 @@ import { PublicacionService } from '../services/publicacion.service';
 
 export class NuevaPublicacionComponent implements OnInit {
   mensaje: string;
-  //usuario: Usuario;
+  usuario: number;
   cursos: Curso[];
   catedraticos: Catedratico[];
   cursoCatedraticos: CursoCatedratico[];
@@ -32,6 +34,8 @@ export class NuevaPublicacionComponent implements OnInit {
     this.display = "1";
     this.index = "0";
   }
+
+
 
   changeDisplay(numero: string){
     this.display = numero;
@@ -89,6 +93,7 @@ export class NuevaPublicacionComponent implements OnInit {
         console.log(err);
       }
     )
+    nuevoArray.push(new Catedratico(0, 'Segio Leonel', 'Gómez Bravo'));
     console.log(nuevoArray);
     this.catedraticos = nuevoArray;
   } //Obtener de BD, guardar cada registro como objeto de la clase Catedratico
@@ -109,11 +114,53 @@ export class NuevaPublicacionComponent implements OnInit {
     )
     console.log(nuevoArray);
     this.cursoCatedraticos = nuevoArray;
-  } //Obtener de la BD, guardar cada registro como objeto de la clase CursoCatedrático
+  } 
+
+  addPublicacion(publicacion: Publicacion){
+    this.publicacion.addPublicacion(publicacion).subscribe(
+      res=>{
+        console.log(res);
+      },err=>{
+        console.log(err);
+      }
+    );
+  }
 
   publicar(){
     if(this.mensajeValido()){
       this.errorMensaje = "";
+      
+      let today = new Date()
+      const d = new Date(); 
+      
+      //console.log(today)
+
+      if(this.display == "1"){
+        console.log(this.mensaje);
+        console.log(this.cursos[this.index].toString());
+        let publicacion: Publicacion={
+          mensaje: this.mensaje,
+          usuario_carnet: 201900629,//this.usuario,
+          fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
+          curso_Catedratico_idCatedraticoCurso: null,
+          curso_CodigoCurso: this.cursos[this.index].codigoCurso,
+          catedratico_NoCatedratico: null,
+          tipo: 1
+        }
+
+        console.log(publicacion);
+
+        this.addPublicacion(publicacion);
+
+      }else if(this.display == "2"){
+        console.log(this.mensaje);
+        console.log(this.catedraticos[this.index].toString());
+
+      }else if(this.display == "3"){
+        console.log(this.mensaje);
+        console.log(this.cursoCatedraticos[this.index].toString());
+
+      }
       //Guardar en BD
     }else{
       this.errorMensaje = "Aún no has escrito ningún mensaje.";

@@ -59,11 +59,11 @@ class CursosAprobadosRoutes {
                 }
             });
         });
-        //******************************************get cursos aprobados************************************************************ */
-        this.router.get('/getCursoAprobado', function (req, res) {
+        //******************************************get Pensum************************************************************ */
+        this.router.get('/getPensum', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    var cadena = "select * from CursosAprobados";
+                    var cadena = "Select Curso.nombre,PensumSistemas.idCursoPensum,PensumSistemas.curso_codigoCurso, PensumSistemas.creditos, PensumSistemas.semestre FROM (PensumSistemas JOIN Curso ON PensumSistemas.curso_CodigoCurso = Curso.codigoCurso);";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);

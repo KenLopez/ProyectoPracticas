@@ -35,7 +35,7 @@ class PublicacionesRoutes {
                 try {
                     let resp = req.body;
                     console.log(resp.carnet);
-                    var cadena = "insert into Publicacion values('" + resp.mensaje + "','" + resp.usuario_carnet + "','" + resp.fecha + "','" + resp.curso_catedratico + "','" + resp.codigo_curso + "','" + resp.no_catedratico + "','" + resp.tipo + "');";
+                    var cadena = "insert into Publicacion values('" + resp.mensaje + "'," + resp.usuario_carnet + ",'" + resp.fecha + "'," + resp.curso_catedratico + "," + resp.codigo_curso + "," + resp.no_catedratico + "," + resp.tipo + ");";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);

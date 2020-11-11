@@ -20,6 +20,10 @@ export class PublicacionService {
     return this.httpClient.get('http://localhost:3000/cursos/curso-catedratico');
   }
 
+  addPublicacion(data:any){
+    return this.httpClient.post('http://localhost:3000/publicacion/nueva', data);
+  }
+
   getAuxiliar(){
     return this.httpClient.get('http://localhost:3000/cursos/auxiliar');
   }

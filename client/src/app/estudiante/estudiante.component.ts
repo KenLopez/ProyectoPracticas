@@ -1,12 +1,34 @@
 import { Component } from '@angular/core';
+import { CursosAprobadosService } from '../services/cursos-aprobados.service';
 import { Curso } from './models/curso';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'estudiante',
+  templateUrl: './estudiante.component.html',
+  styleUrls: ['./estudiante.component.css']
 })
-export class AppComponent {
+export class EstudianteComponent {
+
+  constructor(private cursoAprobados: CursosAprobadosService){}
+
+  /*getPensum(){
+    let nuevoArray: Curso[]=[]
+    this.cursoAprobados.getPensum().subscribe(
+      res=>{console.log(res);
+        console.log("Marquitos");
+        //let catedraticos = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < catedraticos.length ; i++) {
+          nuevoArray.push(new CursoCatedratico(res[i].idCatedraticoCurso, new Curso(res[i].codigoCurso, res[i].nombre), new Catedratico(0, res[i].nombres, res[i].apellidos)));
+        }
+
+      },err=>{
+        console.log(err);
+      }
+    )
+    //console.log(nuevoArray);
+    this.cursoCatedraticos = nuevoArray;
+  }*/
   
   cursosArray: Curso[] = [
     {id:1, nombre: 'IPC1', creditos: 4},
@@ -72,7 +94,6 @@ export class AppComponent {
   }
 
   add(){
-      
     this.cursosArray2.push(this.selectedCurso);
     this.selectedCurso = new Curso();
 
@@ -82,6 +103,7 @@ export class AppComponent {
     if(confirm('Estas seguro de elimiar el curso seleccionado')){
       this.cursosArray2 = this.cursosArray2.filter(x => x != this.selectedCurso);
       this.selectedCurso = new Curso();
+
     }
   }
 

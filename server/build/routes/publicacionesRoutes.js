@@ -120,6 +120,66 @@ class PublicacionesRoutes {
                 }
             });
         });
+        //      **************** Anadir publicacion - auxiliar ******************
+        this.router.post('/nuevaAuxiliar', function (req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    let resp = req.body;
+                    console.log(resp.mensaje);
+                    var cadena = "INSERT INTO Publicacion (mensaje,usuario_carnet,fecha, auxiliar_idAuxiliar, tipo) VALUES ('" + resp.mensaje + "','" + resp.usuario_carnet + "','" + resp.fecha + "','" + resp.auxiliar_idAuxiliar + "','" + resp.tipo + "');";
+                    var con = new mssql.ConnectionPool(config);
+                    con.connect(function (err) {
+                        var req = new mssql.Request(con);
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        req.query(cadena, function (err, recordset) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                res.send(JSON.stringify(recordset));
+                            }
+                            con.close();
+                        });
+                    });
+                }
+                catch (Exception) {
+                    console.log(Exception);
+                }
+            });
+        });
+        //      **************** Anadir publicacion - catedratico ******************
+        this.router.post('/nuevaAuxiliarCurso', function (req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    let resp = req.body;
+                    console.log(resp.mensaje);
+                    var cadena = "INSERT INTO Publicacion (mensaje,usuario_carnet,fecha, auxiliar_Curso, tipo) VALUES ('" + resp.mensaje + "','" + resp.usuario_carnet + "','" + resp.fecha + "','" + resp.auxiliar_Curso + "','" + resp.tipo + "');";
+                    var con = new mssql.ConnectionPool(config);
+                    con.connect(function (err) {
+                        var req = new mssql.Request(con);
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        req.query(cadena, function (err, recordset) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                res.send(JSON.stringify(recordset));
+                            }
+                            con.close();
+                        });
+                    });
+                }
+                catch (Exception) {
+                    console.log(Exception);
+                }
+            });
+        });
         //******************************************get publicacion************************************************************ */
         this.router.get('/getPublicacion', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {

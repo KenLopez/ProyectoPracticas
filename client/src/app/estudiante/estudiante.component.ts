@@ -1,15 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CursosAprobadosService } from '../services/cursos-aprobados.service';
 import { Curso } from './models/curso';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'estudiante',
+  templateUrl: './estudiante.component.html',
+  styleUrls: ['./estudiante.component.css']
 })
-export class AppComponent {
+export class EstudianteComponent implements OnInit{
+
+  constructor(private cursoAprobados: CursosAprobadosService){}
+
+  ngOnInit():void{
+    this.getPensum();
+  }
+
+  getPensum(){
+    let nuevoArray: Curso[]=[]
+    this.cursoAprobados.getPensum().subscribe(
+      res=>{console.log(res);
+        console.log("Marquitos");
+        let cursos = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < cursos.length ; i++) {
+          nuevoArray.push(res[i]);
+        }
+
+      },err=>{
+        console.log(err);
+      }
+    )
+    //console.log(nuevoArray);
+    this.cursosArray = nuevoArray;
+  }
   
   cursosArray: Curso[] = [
-    {id:1, nombre: 'IPC1', creditos: 4},
+    /*{id:1, nombre: 'IPC1', creditos: 4},
     {id:2,nombre: 'IPC2', creditos: 5},
     {id:3,nombre: 'LFP', creditos: 3},
     {id:5,nombre: 'Logica de Sistemas', creditos: 2},
@@ -48,7 +74,7 @@ export class AppComponent {
     {id:38,nombre: 'Practica Final', creditos: 0},
     {id:39,nombre: 'Seminario de Sistemas 1', creditos: 3},
     {id:40,nombre: 'Seminario de Sistemas 2', creditos: 3},
-    {id:41,nombre: 'Seminario de Investigacion', creditos: 3}
+    {id:41,nombre: 'Seminario de Investigacion', creditos: 3}*/
   ];
 
   cursosArray2: Curso[] = [
@@ -64,15 +90,14 @@ export class AppComponent {
 
   addOrEdit(){
 
-    if(this.selectedCurso.id == 0){
-      this.selectedCurso.id = this.cursosArray.length + 1;
+    if(this.selectedCurso.idCursoPensum == 0){
+      this.selectedCurso.idCursoPensum = this.cursosArray.length + 1;
       this.cursosArray.push(this.selectedCurso);
     }
     this.selectedCurso = new Curso();
   }
 
   add(){
-      
     this.cursosArray2.push(this.selectedCurso);
     this.selectedCurso = new Curso();
 
@@ -82,6 +107,7 @@ export class AppComponent {
     if(confirm('Estas seguro de elimiar el curso seleccionado')){
       this.cursosArray2 = this.cursosArray2.filter(x => x != this.selectedCurso);
       this.selectedCurso = new Curso();
+
     }
   }
 

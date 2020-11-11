@@ -1,6 +1,9 @@
 create database proyecto_practicas
 use proyecto_practicas
 
+
+drop database proyecto_practicas
+
 create table Usuario(
 	carnet int PRIMARY KEY,
 	nombres varchar(45),
@@ -48,7 +51,7 @@ create table CursosAprobados(
 );
 
 create table Publicacion(
-	idPublicacion int PRIMARY KEY,
+	idPublicacion int PRIMARY KEY IDENTITY(1,1),
 	mensaje varchar(100),
 	usuario_carnet int FOREIGN KEY REFERENCES Usuario(carnet),
 	fecha date,

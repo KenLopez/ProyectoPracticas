@@ -1,6 +1,10 @@
 import { Comentario } from '../nodes/comentario';
 import { Component, OnInit, Input } from '@angular/core';
 import { Publicacion } from '../Classes/Publicacion';
+import { PublicacionService } from '../services/publicacion.service';
+import { Carnet } from '../nodes/Carnet';
+import { HttpParams } from '@angular/common/http'
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'publicacion',
@@ -15,7 +19,7 @@ export class PublicacionComponent implements OnInit {
   mostrarLista: Boolean = false;
   @Input() publicacion: Publicacion; 
 
-  constructor() { }
+  constructor(private publicacionService: PublicacionService) { }
 
   ngOnInit(): void {
   }
@@ -43,8 +47,26 @@ export class PublicacionComponent implements OnInit {
     }
     console.log(comentario)
   }
+
   getNombre(){
-    //Aquí metan la query que devuelva el nombre del usuario del carnet de la publicacion
+    let cadena: string = " ";
+    let carnetNuevo: Carnet={
+      carnet: this.publicacion.carnet.toString()
+    }
+    cadena = this.getNombresApellidos(carnetNuevo);
+    console.log(cadena);
+    return cadena;
+  }
+
+  getNombresApellidos(carnet: Carnet){
+    let cadena: string;
+    this.publicacionService.getUsuario(carnet).subscribe(
+      res=>{console.log(res)
+        cadena = res[0].nombres + res[0].apellidos;
+      },err=>{console.log(err)
+      }
+    );
+    return cadena;
   }
 
   getTitle(){

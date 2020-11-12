@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Curso } from '../Classes/Curso';
 import { Catedratico } from '../Classes/Catedratico';
 import { CursoCatedratico } from '../Classes/CursoCatedratico';
@@ -18,7 +18,7 @@ import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view
 
 export class NuevaPublicacionComponent implements OnInit {
   mensaje: string;
-  usuario: number;
+  @Input() usuario: number;
   cursos: Curso[];
   catedraticos: Catedratico[];
   cursoCatedraticos: CursoCatedratico[];
@@ -232,7 +232,7 @@ export class NuevaPublicacionComponent implements OnInit {
         
         let publicacion: Publicacion={
           mensaje: this.mensaje,
-          usuario_carnet: 201900629,//this.usuario,
+          usuario_carnet: this.usuario,
           fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
           curso_CodigoCurso: this.cursos[this.index].codigoCurso,
           tipo: 1
@@ -248,7 +248,7 @@ export class NuevaPublicacionComponent implements OnInit {
 
         let publicacion: Publicacion={
           mensaje: this.mensaje,
-          usuario_carnet: 201900629,//this.usuario,
+          usuario_carnet: this.usuario,
           fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
           catedratico_NoCatedratico: this.catedraticos[this.index].noCatedratico,
           tipo: 2
@@ -264,7 +264,7 @@ export class NuevaPublicacionComponent implements OnInit {
 
         let publicacion: Publicacion={
           mensaje: this.mensaje,
-          usuario_carnet: 201900629,//this.usuario,
+          usuario_carnet: this.usuario,
           fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
           curso_Catedratico_idCatedraticoCurso: this.cursoCatedraticos[this.index].id,
           tipo: 3
@@ -280,7 +280,7 @@ export class NuevaPublicacionComponent implements OnInit {
 
         let publicacion: Publicacion={
           mensaje: this.mensaje,
-          usuario_carnet: 201900629,//this.usuario,
+          usuario_carnet: this.usuario,
           fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
           auxiliar_idAuxiliar: this.auxiliares[this.index].noAuxiliar,
           tipo: 4
@@ -296,7 +296,7 @@ export class NuevaPublicacionComponent implements OnInit {
 
         let publicacion: Publicacion={
           mensaje: this.mensaje,
-          usuario_carnet: 201900629,//this.usuario,
+          usuario_carnet: this.usuario,
           fecha: d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0],
           auxiliar_Curso: this.cursosAuxiliar[this.index].id,
           tipo: 5

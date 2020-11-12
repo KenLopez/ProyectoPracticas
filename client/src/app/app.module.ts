@@ -11,12 +11,15 @@ import { SearchComponent } from './search/search.component';
 import { NuevaPublicacionComponent } from './nueva-publicacion/nueva-publicacion.component';
 import { NavegacionComponent } from './navegacion/navegacion.component';
 import { PublicacionComponent } from './publicacion/publicacion.component';
+import { EstudianteComponent } from './estudiante/estudiante.component'
+
 
 
 //Mario, agregue los modulos HttpClientModule y FormsModule
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { RestartUserComponent } from './restart-user/restart-user.component';
+import { ComentarioComponent } from './comentario/comentario.component';
 import { ParentComponentComponent } from './parent-component/parent-component.component';
 
 const routes: Route[] = [
@@ -37,7 +40,10 @@ const routes: Route[] = [
     SearchComponent,
     NavegacionComponent,
     ParentComponentComponent,
-    PublicacionComponent
+    PublicacionComponent,
+    EstudianteComponent,
+    ComentarioComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { GuardsCheckStart } from '@angular/router';
 import { CursosAprobadosService } from '../services/cursos-aprobados.service';
 import { Curso } from './models/curso';
+import { CursoAprobado } from './models/cursoAprobado';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'estudiante',
+  templateUrl: './estudiante.component.html',
+  styleUrls: ['./estudiante.component.css']
 })
 export class EstudianteComponent implements OnInit{
 
@@ -13,6 +15,7 @@ export class EstudianteComponent implements OnInit{
 
   ngOnInit():void{
     this.getPensum();
+    this.getCursosAprobados();
   }
 
   getPensum(){
@@ -32,6 +35,59 @@ export class EstudianteComponent implements OnInit{
     )
     //console.log(nuevoArray);
     this.cursosArray = nuevoArray;
+  }
+
+  getCursosAprobados(){
+    let nuevoArray: Curso[]=[]
+    this.cursoAprobados.getCursosAprobados().subscribe(
+      res=>{console.log(res);
+        console.log("Marquitos");
+        let cursosAprobados = JSON.parse(JSON.stringify(res));
+
+        for (let i=0 ; i < cursosAprobados.length ; i++) {
+          nuevoArray.push(res[i]);
+        }
+      },err=>{
+        console.log(err);
+      }
+    )
+    //console.log(nuevoArray);
+    this.cursosArray2 = nuevoArray;
+  }
+
+  guardarAprobado(){
+    console.log("metodo");
+    let cursoAprobado: CursoAprobado = {
+      carnetU: 201900629,
+      cursoP: this.selectedCurso.idCursoPensum,
+      notaAprobada: this.selectedCurso.nota
+    }  
+    this.cursoAprobados.postCursosAprobados(cursoAprobado).subscribe(
+      res=>{console.log(res);
+      console.log("Marquitos");},err=>{
+        console.log(err);
+      }
+    );
+      this.add();
+      this.getCursosAprobados();
+  }
+
+  eliminarAprobado(){
+    console.log("metodo");
+    let cursoAprobado: CursoAprobado = {
+      carnetU: 201900629,
+      cursoP: this.selectedCurso.idCursoPensum,
+      notaAprobada: this.selectedCurso.nota
+    }  
+    this.cursoAprobados.eliminarCursoAprobado(cursoAprobado).subscribe(
+      res=>{console.log(res);
+      console.log("Marquitos");},err=>{
+        console.log(err);
+      }
+    );
+
+    this.delete();
+    this.getCursosAprobados();
   }
   
   cursosArray: Curso[] = [
@@ -88,6 +144,8 @@ export class EstudianteComponent implements OnInit{
     this.selectedCurso = curso;
   }
 
+  
+
   addOrEdit(){
 
     if(this.selectedCurso.idCursoPensum == 0){
@@ -100,15 +158,16 @@ export class EstudianteComponent implements OnInit{
   add(){
     this.cursosArray2.push(this.selectedCurso);
     this.selectedCurso = new Curso();
-
   }
 
   delete(){
     if(confirm('Estas seguro de elimiar el curso seleccionado')){
       this.cursosArray2 = this.cursosArray2.filter(x => x != this.selectedCurso);
       this.selectedCurso = new Curso();
-
     }
+
+   
+
   }
 
 }

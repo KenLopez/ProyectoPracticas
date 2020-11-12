@@ -11,23 +11,23 @@
     width: 30px;
 }
 
-.catedratico{
+.Catedrático{
     background-color: #de934e;
 }
 
-.curso{
+.Curso{
     background-color: #54c465;
 }
 
-.cursoCat{
+.Curso-Catedrático{
     background-color: #8654c4;
 }
 
-.aux{
+.Auxiliar{
     background-color: #c45454;
 }
 
-.auxCurso{
+.Auxiliar-Curso{
     background-color: #c054c4;
 }
 
@@ -146,4 +146,36 @@ button:hover{
     color: #ebebeb;
     border-color: #2b3e50;
     border-style: solid;
+}
+
+.Comentario{
+    padding-left: 50px;
+    padding-right: 100px;
+    padding-bottom: 20px;
+}
+
+.Comentario textarea{
+    height: 100px;
+    max-height: 150px;
+    padding-left: 10px;
+    border-radius: 6px;
+    border-color: lightgray;
+    margin-left: 10px;
+}
+
+.Comentario p{
+    border-color: black;
+    border-style: groove;
+}
+
+#bnDejarComentario {
+    width: 155px;
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+
+#bnVerComentario {
+    width: 155px;
+    margin-left: 50px;
+    margin-bottom: 10px;
 }

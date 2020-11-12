@@ -5,5 +5,7 @@ export interface Publicacion{
     curso_Catedratico_idCatedraticoCurso?: number,
     curso_CodigoCurso?: number,
     catedratico_NoCatedratico?: number,
-    tipo?: number
+    tipo?: number,
+    auxiliar_idAuxiliar?: number,
+    auxiliar_Curso?: number
 }

@@ -1,8 +1,14 @@
-<navegacion></navegacion>
-<div class="buscador">
-    <search></search>
+<navegacion (display)="changeDisplay($event)"></navegacion>
+<div *ngIf="display==0">
+    <div class="buscador">
+        <search></search>
+    </div>
+    <div class="publicacion container">
+        <nueva-publicacion [usuario]="carnet"></nueva-publicacion>
+        <publicacion *ngFor='let elemento of publicaciones; let i = index' [publicacion] = 'elemento'></publicacion>
+    </div>
 </div>
-<div class="publicacion container">
-    <nueva-publicacion></nueva-publicacion>
-    <publicacion></publicacion>
+<div *ngIf="display == 1">
+    <estudiante></estudiante>
 </div>
+

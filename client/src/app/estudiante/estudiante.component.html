@@ -38,13 +38,16 @@
           <div class="form-group">
             <input type="number" [(ngModel)]="selectedCurso.creditos" placeholder="Creditos del curso" class="form-control" disabled="disabled">
           </div>
-          <button (click)="add()" class="btn btn-primary">
+          <div class="form-group">
+            <input type="number" [(ngModel)]="selectedCurso.nota" placeholder="Nota del curso" class="form-control" >
+          </div>
+          <button (click)="guardarAprobado()" class="btn btn-primary">
             Cargar
           </button>
           <button
-            *ngIf="selectedCurso.id != 0"
+            *ngIf="selectedCurso.idCursoPensum != 0"
             class="btn btn-danger"
-            (click)="delete()"
+            (click)="eliminarAprobado()"
             >
             Eliminar
           </button>
@@ -62,9 +65,9 @@
       <ul class="list-group">
         <li 
         *ngFor="let curs of cursosArray2"
-        class="list-group-item list-group-item-action mt-4 mb-4"
+        class="list-group-item list-group-item-action mt-1 mb-1"
         >
-        <span class="badge badge-primary">{{curs.id}}</span> {{ curs.nombre }} - {{ curs.creditos }} creditos
+        <span class="badge badge-primary">{{curs.idCursoPensum}}</span> {{ curs.nombre }} - {{ curs.notaAprobada }}  
         </li>
       </ul>
 

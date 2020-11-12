@@ -1,3 +1,4 @@
+import { Comentario } from '../nodes/comentario';
 import { Component, OnInit, Input } from '@angular/core';
 import { Publicacion } from '../Classes/Publicacion';
 
@@ -8,13 +9,40 @@ import { Publicacion } from '../Classes/Publicacion';
 })
 export class PublicacionComponent implements OnInit {
 
+  comentario: string;
+  usuario: number = 201900955;
+  mostrar: Boolean = false;
+  mostrarLista: Boolean = false;
   @Input() publicacion: Publicacion; 
 
   constructor() { }
 
   ngOnInit(): void {
   }
+  mostrarOcultar(){
+    if (this.mostrar){
+      this.mostrar = false;
+    }else{
+      this.mostrar = true;
+    }
+  }
 
+  listaComentarios() {
+    if (this.mostrarLista){
+      this.mostrarLista = false;
+    }else{
+      this.mostrarLista = true;
+    }
+  }
+
+  addComentario(){
+    let comentario: Comentario={
+      carnet: 201900955,
+      mensaje: this.comentario,
+      idPublicacion: 1
+    }
+    console.log(comentario)
+  }
   getNombre(){
     //Aquí metan la query que devuelva el nombre del usuario del carnet de la publicacion
   }
@@ -38,5 +66,4 @@ export class PublicacionComponent implements OnInit {
         break;
     }
   }
-
 }

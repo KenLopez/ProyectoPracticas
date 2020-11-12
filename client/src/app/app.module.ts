@@ -13,11 +13,11 @@ import { NavegacionComponent } from './navegacion/navegacion.component';
 import { PublicacionComponent } from './publicacion/publicacion.component';
 import { EstudianteComponent } from './estudiante/estudiante.component'
 
-
 //Mario, agregue los modulos HttpClientModule y FormsModule
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { RestartUserComponent } from './restart-user/restart-user.component';
+import { ComentarioComponent } from './comentario/comentario.component';
 import { ParentComponentComponent } from './parent-component/parent-component.component';
 
 const routes: Route[] = [
@@ -39,7 +39,8 @@ const routes: Route[] = [
     NavegacionComponent,
     ParentComponentComponent,
     PublicacionComponent,
-    EstudianteComponent
+    EstudianteComponent,
+    ComentarioComponent,
   ],
   imports: [
     BrowserModule,

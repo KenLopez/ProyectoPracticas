@@ -1,10 +1,10 @@
 <navegacion (display)="changeDisplay($event)"></navegacion>
 <div *ngIf="display==0">
     <div class="buscador">
-        <search></search>
+        <search (seleccion)='filtrar($event)'></search>
     </div>
     <div class="publicacion container">
-        <nueva-publicacion [usuario]="carnet"></nueva-publicacion>
+        <nueva-publicacion [usuario]="carnet" (newPublicacion)='changeDisplay(0)'></nueva-publicacion>
         <publicacion *ngFor='let elemento of publicaciones; let i = index' [publicacion] = 'elemento'></publicacion>
     </div>
 </div>

@@ -359,6 +359,52 @@ class PublicacionesRoutes{
             }
         });
 
+        //******************************************get all info ************************************************************ */
+        this.router.get('/allPublicaciones', async function (req, res) {
+            try{
+                var cadena = "SELECT idPublicacion as Pid, mensaje as Pmsg, fecha as Pfch, tipo as Ptp, Usuario.carnet as Pcrt, Usuario.nombres as Pname,"+
+                "Usuario.apellidos as PLname, Curso_Catedratico.idCatedraticoCurso as T3id, "+
+                "Curso_Catedratico.curso_CodigoCurso as T3codigo_curso, CurC.nombre as T3curso_nombre,"+
+                "Curso_Catedratico.catedratico_NoCatedratico as T3no_Cat, CatC.nombres as T3nombre_catedratico, CatC.apellidos as T3_apellidos_catedratico,"+
+                "Curso.codigoCurso as T1codigo, Curso.nombre as T1nombre, tipo2.noCatedratico as T2no, tipo2.nombres as T2nombre, tipo2.apellidos as T2apellido,"+
+                "Auxiliar.noAuxiliar as T4idAuxiliar, Auxiliar.nombres as T4nombre_auxiliar, tipo5.idCatedraticoCurso as T5id, tipo5.curso_CodigoCurso as T5codigoCurso,"+
+                "cursoT5.nombre as T5nombre_Curso, tipo5.auxiliar_NoAuxiliar as T5idAuxiliar, auxiliarT5.nombres as T5nombre_Auxiliar"+
+                " from Publicacion"+
+                "INNER JOIN Usuario on Usuario.carnet = Publicacion.usuario_carnet "+
+                "LEFT OUTER JOIN Curso_Catedratico on Curso_Catedratico.idCatedraticoCurso = Publicacion.curso_Catedratico_idCatedraticoCurso "+
+                "LEFT OUTER JOIN Catedratico on Catedratico.noCatedratico = Curso_Catedratico.catedratico_NoCatedratico "+
+                "LEFT OUTER JOIN Curso CurC on CurC.codigoCurso = Curso_Catedratico.curso_CodigoCurso "+
+                "LEFT OUTER JOIN Catedratico CatC on CatC.noCatedratico = Curso_Catedratico.catedratico_NoCatedratico "+
+                "LEFT OUTER JOIN Curso on Curso.codigoCurso = Publicacion.curso_CodigoCurso "+
+                "LEFT OUTER JOIN Catedratico tipo2 on tipo2.noCatedratico = Publicacion.catedratico_NoCatedratico "+
+                "LEFT OUTER JOIN Auxiliar on Auxiliar.noAuxiliar = Publicacion.auxiliar_idAuxiliar "+
+                "LEFT OUTER JOIN Curso_Catedratico tipo5 on tipo5.idCatedraticoCurso = Publicacion.auxiliar_Curso "+
+                "LEFT OUTER JOIN Curso cursoT5 on cursoT5.codigoCurso = tipo5.curso_CodigoCurso "+
+                "LEFT OUTER JOIN Auxiliar auxiliarT5 on auxiliarT5.noAuxiliar = tipo5.auxiliar_NoAuxiliar;";
+                var con = new mssql.ConnectionPool(config);
+
+                con.connect(function(err:any){
+                var req = new mssql.Request(con);
+                if(err){
+                    console.log(err);
+                    return;
+                }
+            req.query(cadena,function(err:any, recordset:any){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.send(JSON.stringify(recordset.recordsets[0]));
+                    }
+                    con.close();
+                });
+            });                
+            }catch(Exception){
+                console.log(Exception);
+            }
+        });
+
+
     }
 }
 

@@ -75,4 +75,8 @@ export class PublicacionService {
   getUsuario(data:any){
     return this.httpClient.get('http://localhost:3000/publicacion/usuario',data);
   }
+
+  getAllPublicaciones(){
+    return this.httpClient.get('http://localhost:3000/publicacion/allPublicaciones');
+  }
 }

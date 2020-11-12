@@ -1,16 +1,19 @@
 <div class="publicacion">
 
-    <h1 class="catedratico"><span class="iconify" data-icon="fa-solid:user-graduate" data-inline="false"></span> Catedrático / Sergio Gómez Bravo</h1>
+    <h1 class="Catedrático">
+        <span class="iconify" data-icon="fa-solid:user-graduate" data-inline="false" *ngIf="publicacion.tipo == 1"></span> 
+        <span class="iconify" data-icon="dashicons:book-alt" data-inline="false" *ngIf="publicacion.tipo == 2"></span> 
+        <span class="iconify" data-icon="fa-solid:chalkboard-teacher" data-inline="false" *ngIf="publicacion.tipo == 3"></span> 
+        <span class="iconify" data-icon="whh:student" data-inline="false" *ngIf="publicacion.tipo == 4"></span> 
+        <span class="iconify" data-icon="fa-solid:laptop-code" data-inline="false" *ngIf="publicacion.tipo == 5"></span>  
+         {{publicacion.getType()}} / {{getTitle()}}
+    </h1>
     <div class="row container datos">
-        <h5 class="col-10">201906570 - Kenneth Haroldo López López</h5>
-        <h6 class="col-2">10/11/2020</h6>
+        <h5 class="col-10 ">{{publicacion.carnet}} - {{getNombre()}}</h5>
+        <h6 class="col-2">{{publicacion.fecha}}</h6>
     </div>
     <div class="row container msg">
-        <p>
-            Nunca había escuchado de este ingeniero hasta ahora que 
-            me asigne 3 cursos con él. He escuchado comentarios mixtos
-            y no se que creer. ¿Podrían contarme sus experiencias en general?
-        </p>
+        <p>{{publicacion.mensaje}}</p>
     </div>
     <div class="row container">
         
@@ -26,3 +29,4 @@
         <comentario></comentario>
     </div>
 </div>
+

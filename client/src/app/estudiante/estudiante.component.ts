@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CursosAprobadosService } from '../services/cursos-aprobados.service';
 import { Curso } from './models/curso';
 
@@ -7,19 +7,23 @@ import { Curso } from './models/curso';
   templateUrl: './estudiante.component.html',
   styleUrls: ['./estudiante.component.css']
 })
-export class EstudianteComponent {
+export class EstudianteComponent implements OnInit{
 
   constructor(private cursoAprobados: CursosAprobadosService){}
 
-  /*getPensum(){
+  ngOnInit():void{
+    this.getPensum();
+  }
+
+  getPensum(){
     let nuevoArray: Curso[]=[]
     this.cursoAprobados.getPensum().subscribe(
       res=>{console.log(res);
         console.log("Marquitos");
-        //let catedraticos = JSON.parse(JSON.stringify(res));
+        let cursos = JSON.parse(JSON.stringify(res));
 
-        for (let i=0 ; i < catedraticos.length ; i++) {
-          nuevoArray.push(new CursoCatedratico(res[i].idCatedraticoCurso, new Curso(res[i].codigoCurso, res[i].nombre), new Catedratico(0, res[i].nombres, res[i].apellidos)));
+        for (let i=0 ; i < cursos.length ; i++) {
+          nuevoArray.push(res[i]);
         }
 
       },err=>{
@@ -27,11 +31,11 @@ export class EstudianteComponent {
       }
     )
     //console.log(nuevoArray);
-    this.cursoCatedraticos = nuevoArray;
-  }*/
+    this.cursosArray = nuevoArray;
+  }
   
   cursosArray: Curso[] = [
-    {id:1, nombre: 'IPC1', creditos: 4},
+    /*{id:1, nombre: 'IPC1', creditos: 4},
     {id:2,nombre: 'IPC2', creditos: 5},
     {id:3,nombre: 'LFP', creditos: 3},
     {id:5,nombre: 'Logica de Sistemas', creditos: 2},
@@ -70,7 +74,7 @@ export class EstudianteComponent {
     {id:38,nombre: 'Practica Final', creditos: 0},
     {id:39,nombre: 'Seminario de Sistemas 1', creditos: 3},
     {id:40,nombre: 'Seminario de Sistemas 2', creditos: 3},
-    {id:41,nombre: 'Seminario de Investigacion', creditos: 3}
+    {id:41,nombre: 'Seminario de Investigacion', creditos: 3}*/
   ];
 
   cursosArray2: Curso[] = [
@@ -86,8 +90,8 @@ export class EstudianteComponent {
 
   addOrEdit(){
 
-    if(this.selectedCurso.id == 0){
-      this.selectedCurso.id = this.cursosArray.length + 1;
+    if(this.selectedCurso.idCursoPensum == 0){
+      this.selectedCurso.idCursoPensum = this.cursosArray.length + 1;
       this.cursosArray.push(this.selectedCurso);
     }
     this.selectedCurso = new Curso();

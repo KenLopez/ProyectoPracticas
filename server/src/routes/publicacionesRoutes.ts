@@ -111,6 +111,65 @@ class PublicacionesRoutes{
                 console.log(Exception);
             }
         });
+
+        //      **************** Anadir publicacion - auxiliar ******************
+        this.router.post('/nuevaAuxiliar', async function (req, res) {
+            try{
+                let resp = req.body;
+                console.log(resp.mensaje);
+                var cadena = "INSERT INTO Publicacion (mensaje,usuario_carnet,fecha, auxiliar_idAuxiliar, tipo) VALUES ('"+resp.mensaje+"','"+resp.usuario_carnet+"','"+resp.fecha+"','"+resp.auxiliar_idAuxiliar+"','"+resp.tipo+"');";
+                var con = new mssql.ConnectionPool(config);
+
+                con.connect(function(err:any){
+                var req = new mssql.Request(con);
+                if(err){
+                    console.log(err);
+                    return;
+                }
+            req.query(cadena,function(err:any, recordset:any){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.send(JSON.stringify(recordset));
+                    }
+                    con.close();
+                });
+            });                
+            }catch(Exception){
+                console.log(Exception);
+            }
+        });
+
+
+        //      **************** Anadir publicacion - catedratico ******************
+        this.router.post('/nuevaAuxiliarCurso', async function (req, res) {
+            try{
+                let resp = req.body;
+                console.log(resp.mensaje);
+                var cadena = "INSERT INTO Publicacion (mensaje,usuario_carnet,fecha, auxiliar_Curso, tipo) VALUES ('"+resp.mensaje+"','"+resp.usuario_carnet+"','"+resp.fecha+"','"+resp.auxiliar_Curso+"','"+resp.tipo+"');";
+                var con = new mssql.ConnectionPool(config);
+
+                con.connect(function(err:any){
+                var req = new mssql.Request(con);
+                if(err){
+                    console.log(err);
+                    return;
+                }
+            req.query(cadena,function(err:any, recordset:any){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.send(JSON.stringify(recordset));
+                    }
+                    con.close();
+                });
+            });                
+            }catch(Exception){
+                console.log(Exception);
+            }
+        });
         //******************************************get publicacion************************************************************ */
         this.router.get('/getPublicacion', async function (req, res) {
             try{

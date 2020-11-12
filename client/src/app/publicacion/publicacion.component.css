@@ -11,23 +11,23 @@
     width: 30px;
 }
 
-.catedratico{
+.Catedrático{
     background-color: #de934e;
 }
 
-.curso{
+.Curso{
     background-color: #54c465;
 }
 
-.cursoCat{
+.Curso-Catedrático{
     background-color: #8654c4;
 }
 
-.aux{
+.Auxiliar{
     background-color: #c45454;
 }
 
-.auxCurso{
+.Auxiliar-Curso{
     background-color: #c054c4;
 }
 

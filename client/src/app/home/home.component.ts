@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Publicacion } from '../Classes/Publicacion';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { Publicacion } from '../Classes/Publicacion'
 
 @Component({
   selector: 'home',
@@ -8,14 +8,27 @@ import { Publicacion } from '../Classes/Publicacion';
 })
 export class HomeComponent implements OnInit {
 
-  publicaciones: Publicacion[] = []
+  @Input()carnet: number
+  publicaciones: Publicacion[];
+  display: number;
 
   constructor() { }
 
   ngOnInit(): void {
-    //getPublicaciones();
+    this.publicaciones = [];
+    this.display = 0;
+    this.getPublicaciones();
   }
 
-  
+  getPublicaciones(){
+
+  }
+
+  changeDisplay(numero: number){
+    this.display = numero;
+    if(numero == 1){
+      this.getPublicaciones();
+    }
+  }
 
 }

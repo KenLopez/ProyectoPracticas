@@ -1,6 +1,6 @@
 <div class="publicacion">
 
-    <h1 class="Catedrático">
+    <h1 class={{publicacion.getType()}}>
         <span class="iconify" data-icon="fa-solid:user-graduate" data-inline="false" *ngIf="publicacion.tipo == 1"></span> 
         <span class="iconify" data-icon="dashicons:book-alt" data-inline="false" *ngIf="publicacion.tipo == 2"></span> 
         <span class="iconify" data-icon="fa-solid:chalkboard-teacher" data-inline="false" *ngIf="publicacion.tipo == 3"></span> 

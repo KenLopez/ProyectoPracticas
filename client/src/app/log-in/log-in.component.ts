@@ -42,9 +42,7 @@ export class LogInComponent implements OnInit {
                 //if ( || correos.includes(NoCarnet)) {
                   for (let i=0 ; i < usuarios.length ; i++) {
                     if (res1[i].carnet == NoCarnet.value || res2[i].correo == NoCarnet.value){
-                      alert('El usuario es el correcto');
                       if (res[i].contrasena == Password.value){
-                        alert('usted ha ingresado exitosamente');
                         this.iniciado.emit(res1[i].carnet); 
                       } else {
                         alert('La contraseña es incorrecta');

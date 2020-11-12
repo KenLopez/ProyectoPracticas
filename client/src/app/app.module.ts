@@ -13,6 +13,8 @@ import { NavegacionComponent } from './navegacion/navegacion.component';
 import { PublicacionComponent } from './publicacion/publicacion.component';
 import { EstudianteComponent } from './estudiante/estudiante.component'
 
+
+
 //Mario, agregue los modulos HttpClientModule y FormsModule
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
@@ -41,6 +43,7 @@ const routes: Route[] = [
     PublicacionComponent,
     EstudianteComponent,
     ComentarioComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,9 @@ export class ParentComponentComponent implements OnInit {
   display: number;
   carnet: number;
 
-  constructor() { }
+  constructor() {
+    this.display = 0;
+   }
   
   iniciar_home(respuesta: number){
     this.display = 1
@@ -17,7 +19,7 @@ export class ParentComponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.display = 0
+    
   }
 
 }

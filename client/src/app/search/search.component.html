@@ -1,14 +1,17 @@
 <div class="container principal">
-    <form>
+    <form (ngSubmit)="filtrar()">
         <div class="container form-row">
             <div class="buscador">
                 <input class="form-control form-control" type="text" placeholder="Buscar..."
                 aria-label="Search">
             </div>
             <div class="selector">
-                <select class="custom-select" id="exampleFormControlSelect1">
-                    <option>Cursos</option>
-                    <option>Catedrático</option>
+                <select class="custom-select" id="exampleFormControlSelect1" (change)="changeIndex($event.target.value)">
+                    <option value="1">Cursos</option>
+                    <option value="2">Catedrático</option>
+                    <option value="3">Curso-Catedrático</option>
+                    <option value="4">Auxiliar</option>
+                    <option value="5">Curso-Auxiliar</option>
                 </select>
             </div>
             <button>Buscar</button> 

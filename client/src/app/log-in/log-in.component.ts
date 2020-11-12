@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { UsuariosService } from '../services/usuarios.service';
 import { Usuario } from '../nodes/usuario';
+import { Session } from 'protractor';
 
 
 @Component({
@@ -10,11 +11,15 @@ import { Usuario } from '../nodes/usuario';
 })
 export class LogInComponent implements OnInit {
 
-  constructor(private usuario:UsuariosService) { }
+  @Output()iniciado = new EventEmitter<number>();
 
-  ngOnInit(): void {
+  constructor(private usuario:UsuariosService) {
   }
 
+  ngOnInit(): void {
+
+  }
+  
   compare(NoCarnet, Password){
 
     this.usuario.obtenerCarnets().subscribe(
@@ -31,17 +36,14 @@ export class LogInComponent implements OnInit {
                 let contrasenas = JSON.parse(JSON.stringify(res));
                 let usuarios = JSON.parse(JSON.stringify(res1));
                 let correos = JSON.parse(JSON.stringify(res2));
-
+                
                 console.log(contrasenas.length);
 
                 //if ( || correos.includes(NoCarnet)) {
                   for (let i=0 ; i < usuarios.length ; i++) {
-                    console.log(res1[i].carnet)
-                    console.log(NoCarnet.value);
                     if (res1[i].carnet == NoCarnet.value || res2[i].correo == NoCarnet.value){
-                      alert('El usuario es el correcto');
                       if (res[i].contrasena == Password.value){
-                        alert('usted ha ingresado exitosamente');
+                        this.iniciado.emit(res1[i].carnet); 
                       } else {
                         alert('La contraseña es incorrecta');
                         break;

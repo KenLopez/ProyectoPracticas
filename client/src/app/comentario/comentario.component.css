@@ -1,0 +1,12 @@
+.comentarios {
+    border-color: lightgrey;
+    border-style: solid;
+    width: 955px;
+    border-radius: 6px;
+    margin: 10px;
+    padding-top: 5px;
+}
+
+.comentarios p {
+    padding-left: 10px;
+}

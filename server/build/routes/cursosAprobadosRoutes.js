@@ -13,6 +13,7 @@ const express_1 = require("express");
 var mssql = require('mssql');
 var config = {
     server: 'localhost',
+    database: 'proyecto_practicas',
     host: 'localhost',
     user: 'ProyectoPracticas',
     password: '1234',
@@ -29,13 +30,13 @@ class CursosAprobadosRoutes {
     }
     config() {
         this.router.get('/', (req, res) => { res.send('esto es un curso aprobado'); });
-        //      **************** Anadir comentario ******************
+        //      **************** Anadir curso aprobado ******************
         this.router.post('/nuevo', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
                     let resp = req.body;
-                    console.log(resp.carnet);
-                    var cadena = "insert into CursosAprobados values('" + resp.carnet + "','" + resp.curso + "','" + resp.notaAprobada + "');";
+                    console.log(resp.carnetU);
+                    var cadena = "insert into CursosAprobados values('" + resp.carnetU + "','" + resp.cursoP + "','" + resp.notaAprobada + "');";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);
@@ -59,11 +60,69 @@ class CursosAprobadosRoutes {
                 }
             });
         });
-        //******************************************get cursos aprobados************************************************************ */
-        this.router.get('/getCursoAprobado', function (req, res) {
+        //      **************** eliminar curso aprobado ******************
+        this.router.post('/eliminar', function (req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    var cadena = "select * from CursosAprobados";
+                    let resp = req.body;
+                    console.log(resp.carnetU);
+                    var cadena = "delete from CursosAprobados where carnetU = " + resp.carnetU + " and cursoP = " + resp.cursoP + ";";
+                    var con = new mssql.ConnectionPool(config);
+                    con.connect(function (err) {
+                        var req = new mssql.Request(con);
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        req.query(cadena, function (err, recordset) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                res.send(JSON.stringify(recordset));
+                            }
+                            con.close();
+                        });
+                    });
+                }
+                catch (Exception) {
+                    console.log(Exception);
+                }
+            });
+        });
+        //******************************************get Pensum************************************************************ */
+        this.router.get('/getPensum', function (req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    var cadena = "Select PensumSistemas.idCursoPensum,Curso.nombre, PensumSistemas.creditos FROM (PensumSistemas JOIN Curso ON PensumSistemas.curso_CodigoCurso = Curso.codigoCurso);";
+                    var con = new mssql.ConnectionPool(config);
+                    con.connect(function (err) {
+                        var req = new mssql.Request(con);
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        req.query(cadena, function (err, recordset) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                res.send(JSON.stringify(recordset.recordsets[0]));
+                            }
+                            con.close();
+                        });
+                    });
+                }
+                catch (Exception) {
+                    console.log(Exception);
+                }
+            });
+        });
+        //******************************************get cursos aprobados************************************************************ */
+        this.router.get('/getCursosAprobados', function (req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    var cadena = "Select PensumSistemas.idCursoPensum,Curso.nombre, CursosAprobados.notaAprobada FROM ((PensumSistemas JOIN Curso ON PensumSistemas.curso_CodigoCurso = Curso.codigoCurso) JOIN CursosAprobados ON PensumSistemas.idCursoPensum = CursosAprobados.cursoP and CursosAprobados.carnetU=201900629);";
                     var con = new mssql.ConnectionPool(config);
                     con.connect(function (err) {
                         var req = new mssql.Request(con);

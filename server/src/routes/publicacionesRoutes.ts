@@ -196,6 +196,33 @@ class PublicacionesRoutes{
                 console.log(Exception);
             }
         });
+//******************************************get usuario************************************************************ */
+        this.router.get('/usuario', async function (req, res) {
+            try{
+                let resp = req.body;
+                var cadena = "Select nombres,apellidos from Usuario where carnet  = '"+resp.carnet+"';";
+                var con = new mssql.ConnectionPool(config);
+
+                con.connect(function(err:any){
+                var req = new mssql.Request(con);
+                if(err){
+                    console.log(err);
+                    return;
+                }
+            req.query(cadena,function(err:any, recordset:any){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.send(JSON.stringify(recordset.recordsets[0]));
+                    }
+                    con.close();
+                });
+            });                
+            }catch(Exception){
+                console.log(Exception);
+            }
+        });
 
         //******************************************get info publicacion tipo 1************************************************************ */
         this.router.get('/tipo1', async function (req, res) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Curso } from '../Classes/Curso';
 import { Catedratico } from '../Classes/Catedratico';
 import { CursoCatedratico } from '../Classes/CursoCatedratico';
@@ -19,6 +19,7 @@ import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view
 export class NuevaPublicacionComponent implements OnInit {
   mensaje: string;
   @Input() usuario: number;
+  @Output() newPublicacion = new EventEmitter();
   cursos: Curso[];
   catedraticos: Catedratico[];
   cursoCatedraticos: CursoCatedratico[];
@@ -85,7 +86,6 @@ export class NuevaPublicacionComponent implements OnInit {
         console.log(err);
       }
     )
-    console.log(nuevoArray);
     this.cursos = nuevoArray;
   } //Obtener de BD, guardar cada registro como objeto de la clase Curso 
   
@@ -245,7 +245,7 @@ export class NuevaPublicacionComponent implements OnInit {
       }else if(this.display == "2"){
         console.log(this.mensaje);
         console.log(this.catedraticos[this.index].toString());
-
+        
         let publicacion: Publicacion={
           mensaje: this.mensaje,
           usuario_carnet: this.usuario,
@@ -307,12 +307,24 @@ export class NuevaPublicacionComponent implements OnInit {
         this.addPublicacioncursoAuxiliar(publicacion);
 
       }
+      this.esperarServer();
       //Guardar en BD
     }else{
       this.errorMensaje = "Aún no has escrito ningún mensaje.";
     }
 
     this.mensaje = "";
+  }
+
+  private async esperarServer()
+  {
+    await this.delay(500);;
+    this.newPublicacion.emit();
+  }
+
+  private delay(ms: number)
+  {
+  return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   quitarError(){

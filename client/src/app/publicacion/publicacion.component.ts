@@ -50,12 +50,12 @@ export class PublicacionComponent implements OnInit {
 
   getNombre(){
     let cadena: string = " ";
-    let carnetNuevo: Carnet={
+    /*let carnetNuevo: Carnet={
       carnet: this.publicacion.carnet.toString()
     }
     cadena = this.getNombresApellidos(carnetNuevo);
     console.log(cadena);
-    return cadena;
+    return cadena;*/
   }
 
   getNombresApellidos(carnet: Carnet){

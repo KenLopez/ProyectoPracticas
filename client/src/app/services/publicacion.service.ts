@@ -48,11 +48,35 @@ export class PublicacionService {
     return this.httpClient.post('http://localhost:3000/publicacion/nuevaAuxiliarCurso',data);
   }
 
+  getInfoPublicacionTipo1(data:any){
+    return this.httpClient.post('http://localhost:3000/publicacion/tipo1',data);
+  }
+
+  getInfoPublicacionTipo2(data:any){
+    return this.httpClient.post('http://localhost:3000/publicacion/tipo2',data);
+  }
+
+  getInfoPublicacionTipo3(data:any){
+    return this.httpClient.post('http://localhost:3000/publicacion/tipo3',data);
+  }
+
+  getInfoPublicacionTipo4(data:any){
+    return this.httpClient.post('http://localhost:3000/publicacion/tipo4',data);
+  }
+
+  getInfoPublicacionTipo5(data:any){
+    return this.httpClient.post('http://localhost:3000/publicacion/tipo5',data);
+  }
+
   getPublicacion(){
     return this.httpClient.get('http://localhost:3000/publicacion/getPublicacion');
   }
 
   getUsuario(data:any){
     return this.httpClient.get('http://localhost:3000/publicacion/usuario',data);
+  }
+
+  getAllPublicaciones(){
+    return this.httpClient.get('http://localhost:3000/publicacion/allPublicaciones');
   }
 }

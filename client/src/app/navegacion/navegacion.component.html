@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/Home">
+    <a class="navbar-brand" (click)="cambiarDisplay(0)">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Usac_logo.png/250px-Usac_logo.png" width="70" height="70" class="d-inline-block align-top" alt="" loading="lazy">
         USAC TOPCHART
     </a>
@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/Perfil">Perfil </a>
+          <a class="nav-link" (click)="cambiarDisplay(1)">Perfil </a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">

@@ -1,4 +1,6 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EMPTY } from 'rxjs';
 import { Usuario } from '../nodes/usuario';
 import { UsuariosService } from '../services/usuarios.service';
@@ -78,7 +80,7 @@ export class SignInComponent implements OnInit {
     correo:''
   }
 
-  constructor(private usuario:UsuariosService) { }
+  constructor(private usuario:UsuariosService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -87,6 +89,7 @@ export class SignInComponent implements OnInit {
     this.usuario.añadirUsuario(this.user).subscribe(
       res=>{
         console.log(res);
+        this.router.navigate(['/'])
       },err=>{
         console.log(err);
       }

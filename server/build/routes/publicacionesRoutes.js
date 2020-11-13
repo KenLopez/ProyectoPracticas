@@ -208,6 +208,35 @@ class PublicacionesRoutes {
                 }
             });
         });
+        //******************************************get usuario************************************************************ */
+        this.router.get('/usuario', function (req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    let resp = req.body;
+                    var cadena = "Select nombres,apellidos from Usuario where carnet  = '" + resp.carnet + "';";
+                    var con = new mssql.ConnectionPool(config);
+                    con.connect(function (err) {
+                        var req = new mssql.Request(con);
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        req.query(cadena, function (err, recordset) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            else {
+                                res.send(JSON.stringify(recordset.recordsets[0]));
+                            }
+                            con.close();
+                        });
+                    });
+                }
+                catch (Exception) {
+                    console.log(Exception);
+                }
+            });
+        });
     }
 }
 const publicacionesRoutes = new PublicacionesRoutes();

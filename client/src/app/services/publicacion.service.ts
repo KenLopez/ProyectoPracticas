@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { NgModel } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,13 @@ export class PublicacionService {
 
   addPublicacionAuxiliarCurso(data:any){
     return this.httpClient.post('http://localhost:3000/publicacion/nuevaAuxiliarCurso',data);
+  }
+
+  getPublicacion(){
+    return this.httpClient.get('http://localhost:3000/publicacion/getPublicacion');
+  }
+
+  getUsuario(data:any){
+    return this.httpClient.get('http://localhost:3000/publicacion/usuario',data);
   }
 }
